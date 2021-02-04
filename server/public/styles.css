@@ -1,0 +1,55 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.home {
+  width: 26%;
+  margin: auto;
+  text-align: center;
+  color: #fff;
+}
+
+.home h2,
+.home h5 {
+  background-color: #c4c4c4;
+  padding: 2%;
+}
+
+.home h2 {
+  margin-bottom: 0%;
+}
+
+.home img {
+  width: 100%;
+}
+
+.header {
+  font-size: 2rem;
+  color: #fff;
+  width: 80%;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.header-span {
+  float: right;
+}
+
+.header .fas {
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 5%;
+}
+
+.navbar-container {
+  width: 80%;
+  margin: auto;
+  margin-top: 3%;
+}
+
+.navbar-fas {
+  margin-left: 17%;
+  font-size: 1.7rem;
+}
