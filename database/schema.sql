@@ -23,8 +23,8 @@ CREATE TABLE "users" (
 CREATE TABLE "recipes" (
 	"recipeId" serial NOT NULL,
 	"recipeTitle" TEXT NOT NULL,
-	"createdBy" integer NOT NULL,
-	"imageUrl" path NOT NULL,
+	"createdBy" integer,
+	"imageUrl" TEXT NOT NULL,
 	CONSTRAINT "recipes_pk" PRIMARY KEY ("recipeId")
 ) WITH (
   OIDS=FALSE
@@ -55,9 +55,16 @@ CREATE TABLE "recipeSteps" (
 
 
 
-ALTER TABLE "recipes" ADD CONSTRAINT "recipes_fk0" FOREIGN KEY ("createdBy") REFERENCES "users"("userId");
 
 ALTER TABLE "ingredients" ADD CONSTRAINT "ingredients_fk0" FOREIGN KEY ("recipeId") REFERENCES "recipes"("recipeId");
 
 ALTER TABLE "recipeSteps" ADD CONSTRAINT "recipeSteps_fk0" FOREIGN KEY ("recipeId") REFERENCES "recipes"("recipeId");
 
+
+
+
+ALTER TABLE "recipes" ADD CONSTRAINT "recipes_fk0" FOREIGN KEY ("createdBy") REFERENCES "users"("userId");
+
+ALTER TABLE "ingredients" ADD CONSTRAINT "ingredients_fk0" FOREIGN KEY ("recipeId") REFERENCES "recipes"("recipeId");
+
+ALTER TABLE "recipeSteps" ADD CONSTRAINT "recipeSteps_fk0" FOREIGN KEY ("recipeId") REFERENCES "recipes"("recipeId");
