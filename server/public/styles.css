@@ -21,6 +21,7 @@ body {
 
 .home img {
   width: 100%;
+  height: 70%;
 }
 
 .header {
@@ -44,7 +45,7 @@ body {
 }
 
 .navbar-container {
-  width: 80%;
+  width: 70%;
   margin: auto;
   margin-top: 3%;
 }
@@ -52,4 +53,70 @@ body {
 .navbar-fas {
   margin-left: 17%;
   font-size: 1.7rem;
+  cursor: pointer;
+}
+
+form{
+  width: 80%;
+  margin: auto;
+}
+
+.search {
+  border-radius: 4px;
+  margin-left: 30%;
+  width: 30%;
+  border: 1px solid #c4c4c4;
+  cursor: pointer;
+}
+
+.fas-search {
+  color: #6e6c6c;
+  padding: 2%;
+}
+
+.search-box{
+  width: 88%;
+  margin: auto;
+}
+
+.search-img{
+  width: 20%;
+}
+
+.search-title{
+  font-size: 1.5rem;
+  color: salmon;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.recipe{
+  width: 90%;
+  margin-left: 6%;
+}
+
+.recipe-img{
+  width: 10%;
+}
+
+.recipe-title{
+  margin-left: 5%;
+  font-size: 1.5rem;
+  color: salmon;
+  font-weight: bold;
+}
+
+.recipe-header{
+  font-weight: bold;
+  font-size: 1rem;
+  color: salmon;
+}
+
+.recipe-text{
+  font-size: 0.8rem;
+  color: #525252;
+}
+
+.pointer {
+  cursor: pointer;
 }
