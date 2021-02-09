@@ -120,3 +120,36 @@ form{
 .pointer {
   cursor: pointer;
 }
+
+span.dropdown {
+  margin-right: 3%;
+}
+
+.dropdown-content{
+  text-align: center;
+  background-color: #c4c4c4;
+  list-style-type: none;
+  float: right;
+  width: 12%;
+  padding: 0.3rem 1rem;
+}
+
+.dropdown-content li > a {
+  text-decoration: none;
+  font-size: 70%;
+  color: #525252;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.converter {
+  width: 80%
+}
+
+.plus {
+  margin-left: 8%;
+}
