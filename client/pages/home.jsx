@@ -1,6 +1,7 @@
 import React from 'react';
 import Converter from '../components/converter';
-import Search from '../components/search';
+import Search from '../pages/search';
+import Post from '../pages/post';
 
 export default class Home extends React.Component {
   constructor() {
@@ -13,6 +14,7 @@ export default class Home extends React.Component {
       recipeId: '',
       ingredients: [],
       instructions: [],
+      post: false,
       search: false,
       show: false,
       toggleOn: false,
@@ -24,6 +26,7 @@ export default class Home extends React.Component {
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleMetricClick = this.handleMetricClick.bind(this);
     this.handleHeaderClick = this.handleHeaderClick.bind(this);
+    this.handlePostClick = this.handlePostClick.bind(this);
   }
 
   componentDidMount() {
@@ -66,7 +69,8 @@ export default class Home extends React.Component {
       search: true,
       toggleOff: false,
       toggleOn: false,
-      show: false
+      show: false,
+      post: false
     })
   }
 
@@ -75,7 +79,8 @@ export default class Home extends React.Component {
       toggleOn: false,
       toggleOff: !this.state.toggleOff,
       search: false,
-      show: false
+      show: false,
+      post: false
     })
   }
 
@@ -84,7 +89,8 @@ export default class Home extends React.Component {
       toggleOff: false,
       toggleOn: true,
       search: false,
-      show: false
+      show: false,
+      post: false
     })
   }
 
@@ -93,15 +99,48 @@ export default class Home extends React.Component {
       search: false,
       toggleOff: false,
       toggleOn: false,
-      show: false
+      show: false,
+      post: false
+    })
+  }
+
+  handlePostClick() {
+    this.setState({
+      post: true,
+      search: false,
+      toggleOff: false,
+      toggleOn: false,
+      show: false,
     })
   }
 
   render() {
+    if (this.state.post === true) {
+      return (
+        <div>
+        <header>
+         <nav className="navbar navbar-dark bg-dark shadow-sm">
+          <div className="container">
+          <span className="col px-0">
+          <a href="#" className="navbar-brand header" onClick={this.handleHeaderClick}>
+             perfect pepper
+           </a>
+           </span>
+             <span className='header-span' onClick={this.handleMenuClick}>
+               <i className="header fas fa-bars"></i>
+             </span>
+             </div>
+           </nav>
+          </header>
+          <Post />
+        </div>
+      )
+    }
+
     if (this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === false) {
       return (
         <div>
-          <header className="mb-5">
+          <header>
             <nav className="navbar navbar-dark bg-dark shadow-sm">
               <div className="container">
                 <span className="col px-0">
@@ -121,12 +160,18 @@ export default class Home extends React.Component {
             <h5 className='pointer' onClick={this.displayRecipe}>{this.state.value}</h5>
           </div>
           <div className="navbar-container">
-            <i onClick={this.handleHeaderClick} className="fas fa-home navbar-fas"></i>
+            <span onClick={this.handleHeaderClick}>
+              <i className="fas fa-home navbar-fas"></i>
+            </span>
             <span onClick={this.handleClick}>
               <i className="fas fa-search navbar-fas"></i>
             </span>
-            <i className="fas fa-plus navbar-fas"></i>
-            <i className="fas fa-user-circle navbar-fas"></i>
+            <span onClick={this.handlePostClick}>
+              <i className="fas fa-plus navbar-fas"></i>
+            </span>
+            <span>
+              <i className="fas fa-user-circle navbar-fas"></i>
+            </span>
           </div>
         </div>
       );
@@ -135,7 +180,7 @@ export default class Home extends React.Component {
     if (this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === true) {
       return (
         <div>
-          <header className="mb-5">
+          <header>
             <nav className="navbar navbar-dark bg-dark shadow-sm">
               <div className="container">
                 <span className="col px-0">
@@ -175,7 +220,7 @@ export default class Home extends React.Component {
     if (this.state.toggleOn === true && this.state.show === false && this.state.search === false && this.state.toggleOff === false) {
       return (
         <div>
-          <header className="mb-5">
+          <header>
             <nav className="navbar navbar-dark bg-dark shadow-sm">
               <div className="container">
                 <span className="col px-0">
@@ -197,7 +242,7 @@ export default class Home extends React.Component {
     if (this.state.search === true && this.state.show === false) {
       return (
         <div>
-          <header className="mb-5">
+          <header>
             <nav className="navbar navbar-dark bg-dark shadow-sm">
               <div className="container">
                 <span className="col px-0">
@@ -219,7 +264,7 @@ export default class Home extends React.Component {
       const { title, ingredients, instructions, url, recipeId } = this.state;
       return (
         <div>
-          <header className="mb-5">
+          <header>
             <nav className="navbar navbar-dark bg-dark shadow-sm">
               <div className="container">
                 <span className="col px-0">
