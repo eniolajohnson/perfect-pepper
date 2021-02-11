@@ -1,5 +1,6 @@
 import React from 'react';
 import Converter from '../components/converter';
+import AllRecipes from '../pages/allRecipes';
 import Search from '../pages/search';
 import Post from '../pages/post';
 
@@ -14,6 +15,7 @@ export default class Home extends React.Component {
       recipeId: '',
       ingredients: [],
       instructions: [],
+      allRecipes: false,
       post: false,
       search: false,
       show: false,
@@ -27,6 +29,7 @@ export default class Home extends React.Component {
     this.handleMetricClick = this.handleMetricClick.bind(this);
     this.handleHeaderClick = this.handleHeaderClick.bind(this);
     this.handlePostClick = this.handlePostClick.bind(this);
+    this.handleAllRecipes = this.handleAllRecipes.bind(this);
   }
 
   componentDidMount() {
@@ -64,8 +67,20 @@ export default class Home extends React.Component {
       .catch(error => console.error('Fetch failed!', error));
   }
 
+  handleAllRecipes() {
+    this.setState({
+      allRecipes: true,
+      search: false,
+      toggleOff: false,
+      toggleOn: false,
+      show: false,
+      post: false
+    })
+  }
+
   handleClick() {
     this.setState({
+      allRecipes: false,
       search: true,
       toggleOff: false,
       toggleOn: false,
@@ -76,6 +91,7 @@ export default class Home extends React.Component {
 
   handleMenuClick() {
     this.setState({
+      allRecipes: false,
       toggleOn: false,
       toggleOff: !this.state.toggleOff,
       search: false,
@@ -86,6 +102,7 @@ export default class Home extends React.Component {
 
   handleMetricClick() {
     this.setState({
+      allRecipes: false,
       toggleOff: false,
       toggleOn: true,
       search: false,
@@ -96,6 +113,7 @@ export default class Home extends React.Component {
 
   handleHeaderClick() {
     this.setState({
+      allRecipes: false,
       search: false,
       toggleOff: false,
       toggleOn: false,
@@ -106,6 +124,7 @@ export default class Home extends React.Component {
 
   handlePostClick() {
     this.setState({
+      allRecipes: false,
       post: true,
       search: false,
       toggleOff: false,
@@ -115,22 +134,43 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (this.state.allRecipes === true) {
+      return (
+        <div>
+          <header>
+            <nav className="navbar navbar-dark bg-dark shadow-sm">
+              <div className="container">
+                <span className="col px-0">
+                  <a href="#" className="navbar-brand header" onClick={this.handleHeaderClick}>
+                    perfect pepper </a>
+                </span>
+                <span className='header-span' onClick={this.handleMenuClick}>
+                  <i className="header fas fa-bars"></i>
+                </span>
+              </div>
+            </nav>
+          </header>
+          <AllRecipes />
+        </div>
+      )
+    }
+
     if (this.state.post === true) {
       return (
         <div>
-        <header>
-         <nav className="navbar navbar-dark bg-dark shadow-sm">
-          <div className="container">
-          <span className="col px-0">
-          <a href="#" className="navbar-brand header" onClick={this.handleHeaderClick}>
-             perfect pepper
+          <header>
+            <nav className="navbar navbar-dark bg-dark shadow-sm">
+              <div className="container">
+                <span className="col px-0">
+                  <a href="#" className="navbar-brand header" onClick={this.handleHeaderClick}>
+                    perfect pepper
            </a>
-           </span>
-             <span className='header-span' onClick={this.handleMenuClick}>
-               <i className="header fas fa-bars"></i>
-             </span>
-             </div>
-           </nav>
+                </span>
+                <span className='header-span' onClick={this.handleMenuClick}>
+                  <i className="header fas fa-bars"></i>
+                </span>
+              </div>
+            </nav>
           </header>
           <Post />
         </div>
@@ -196,7 +236,7 @@ export default class Home extends React.Component {
             <span className="dropdown">
               <ul className="dropdown-content">
                 <li onClick={this.handleMetricClick}><a href="#metric">Metric Converter</a></li>
-                <li><a href="#all-recipes">All Recipes</a></li>
+                <li onClick={this.handleAllRecipes}><a href="#all-recipes">All Recipes</a></li>
               </ul>
             </span>
           </header>
@@ -294,10 +334,3 @@ export default class Home extends React.Component {
     }
   }
 }
-
-// export default function Home(props) {
-//   return (
-//     <>
-//     </>
-//   );
-// }
