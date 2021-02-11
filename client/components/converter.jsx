@@ -74,9 +74,53 @@ export default class Converter extends React.Component {
   }
 
   render() {
-    if (this.state.isSubmit === false) {
+    const { isSubmit, valueGr, valueKg, valueCup, valueOz, valueMl, name } = this.state;
+    if (isSubmit === false) {
       return (
         <div className='converter'>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="ml">Millilitre To Oz</label>
+            </div>
+            <input type="text" name='ml' value={valueMl} onChange={this.handleChangeMl} />
+            <button onSubmit={this.handleSubmit}>Calculate</button>
+          </form>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="oz">Oz To Cup</label>
+            </div>
+            <input type="text" name='oz' value={valueOz} onChange={this.handleChangeOz} />
+            <button onSubmit={this.handleSubmit}>Calculate</button>
+          </form>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="cup">Cup to Litre</label>
+            </div>
+            <input type="text" name='cup' value={valueCup} onChange={this.handleChangeCup} />
+            <button onSubmit={this.handleSubmit}>Calculate</button>
+          </form>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="grams">Grams to Litre/Kg</label>
+            </div>
+            <input type="text" name='grams' value={valueGr} onChange={this.handleChangeGr} />
+            <button onSubmit={this.handleSubmit}>Calculate</button>
+          </form>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="kg">Kilograms to Pounds</label>
+            </div>
+            <input type="text" name='kg' value={valueKg} onChange={this.handleChangeKg} />
+            <button onSubmit={this.handleSubmit}>Calculate</button>
+          </form>
+        </div>
+      )
+    }
+
+    if (name.length === 0 && isSubmit === true) {
+      return (
+        <div className='converter'>
+          <h5 className='red'>Please input a number</h5>
           <form onSubmit={this.handleSubmit}>
             <div>
               <label htmlFor="ml">Millilitre To Oz</label>
@@ -116,7 +160,7 @@ export default class Converter extends React.Component {
       )
     }
 
-    if (this.state.name === 'ml') {
+    if (isSubmit === true && this.state.name === 'ml') {
       return (
         <div className='converter plus'>
           <p>{`There is ${mlToOz(this.state.valueMl)} oz in ${this.state.valueMl} ml `}</p>
@@ -124,7 +168,7 @@ export default class Converter extends React.Component {
         </div>
       )
     }
-    if (this.state.name === 'oz') {
+    if (isSubmit === true && this.state.name === 'oz') {
       return (
         <div className='converter plus'>
           <p>{`There is ${ozToCup(this.state.valueOz)} cup(s) in ${this.state.valueOz} oz `}</p>
@@ -132,7 +176,7 @@ export default class Converter extends React.Component {
         </div>
       )
     }
-    if (this.state.name === 'cup') {
+    if (isSubmit === true && this.state.name === 'cup') {
       return (
         <div className='converter plus'>
           <p>{`There is ${cupToLtr(this.state.valueCup)} litre(s) in ${this.state.valueCup} cup(s) `}</p>
@@ -140,7 +184,7 @@ export default class Converter extends React.Component {
         </div>
       )
     }
-    if (this.state.name === 'grams') {
+    if (isSubmit === true && this.state.name === 'grams') {
       return (
         <div className='converter plus'>
           <p>{`There is ${grToKg(this.state.valueGr)} litre(s)/Kg in ${this.state.valueGr} gram(s) `}</p>
@@ -148,7 +192,7 @@ export default class Converter extends React.Component {
         </div>
       )
     }
-    if (this.state.name === 'kg') {
+    if (isSubmit === true && this.state.name === 'kg') {
       return (
         <div className='converter plus'>
           <p>{`There is ${kgToPounds(this.state.valueKg)} pounds(s) in ${this.state.valueKg} kilogram(s) `}</p>

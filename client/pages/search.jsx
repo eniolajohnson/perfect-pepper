@@ -8,6 +8,7 @@ export default class search extends React.Component {
       recipes: [],
       instructions: [],
       ingredients: [],
+      found: [],
       recipeId: '',
       url: '',
       title: '',
@@ -18,6 +19,16 @@ export default class search extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleTryAgain = this.handleTryAgain.bind(this);
+  }
+
+  componentDidMount(){
+    fetch(`/api/recipes`)
+      .then(response => response.json())
+      .then(recipes => this.setState({
+        recipes
+      }))
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   handleChange(event) {
@@ -27,19 +38,14 @@ export default class search extends React.Component {
   handleSubmit(event) {
     this.setState({ isSubmitted: true})
     event.preventDefault();
-    fetch(`/api/recipes`)
-      .then(response => response.json())
-      .then(recipes => this.setState({
-        recipes
-      }))
-      .catch(error => console.error('Fetch failed!', error));
+    const title = this.state.value
+    const found = this.state.recipes.filter(recipe => recipe.recipeTitle.toLowerCase() === title.toLowerCase())
+    this.setState({ found })
   }
 
   handleClick(){
     this.setState({ display:true })
-    const title = this.state.value
-    const found = this.state.recipes.filter(recipe => recipe.recipeTitle.toLowerCase() === title.toLowerCase())
-    const id = found[0].recipeId
+    const id = this.state.found[0].recipeId
     fetch(`/api/recipes/${id}`)
       .then(response => response.json())
       .then(details => {
@@ -61,6 +67,14 @@ export default class search extends React.Component {
       .catch(error => console.error('Fetch failed!', error));
   }
 
+  handleTryAgain(event){
+    event.preventDefault()
+    this.setState({
+      display: false,
+      isSubmitted: false
+    })
+  }
+
   render(){
     if (this.state.isSubmitted === false){
       return (
@@ -71,24 +85,26 @@ export default class search extends React.Component {
     }
 
     if (this.state.isSubmitted === true && this.state.display === false) {
-      return (
-        <div className='search-box'>
-          { this.state.recipes.map(
-            recipe => {
-              if (recipe.recipeTitle.toLowerCase() === this.state.value.toLowerCase()) {
-                return (
-                  <div key={recipe.recipeId}>
-                    <div className='search-title' onClick={this.handleClick}>
-                      <a key={recipe.recipeId}>{recipe.recipeTitle}</a>
-                    </div>
-                    <img className='search-img' src={recipe.imageUrl} alt="recipe image"/>
-                  </div>
-              )
-              }
-            }
-          )}
-        </div>
-      );
+      const found = this.state.found;
+      if (found.length > 0){
+        return (
+          <div className='search'>
+            <div key={found[0].recipeId}>
+              <div className='search-title' onClick={this.handleClick}>
+                <h5 key={found[0].recipeId}>{found[0].recipeTitle}</h5>
+              </div>
+              <img className='search-img' src={found[0].imageUrl} alt="recipe image" />
+            </div>
+          </div>
+        )}
+      if (found.length < 1) {
+        return (
+          <div className='not-found'>
+          <h5>Uh-oh! Recipe not found</h5>
+          <a onClick={this.handleTryAgain} href="">Try again</a>
+          </div>
+        )
+      }
     }
 
     if (this.state.isSubmitted === true && this.state.display === true) {

@@ -34,6 +34,24 @@ app.get('/api/recipes', (req, res) => {
     });
 });
 
+app.get('/api/ingredients', (req, res) => {
+  const sql = `
+    select *
+      from "ingredients"
+     order by "ingredientId"
+  `;
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.get('/api/recipes/:recipeId', (req, res) => {
   const recipeId = parseInt(req.params.recipeId, 10);
   if (!Number.isInteger(recipeId) || recipeId < 1) {
@@ -108,6 +126,72 @@ app.get('/api/recipes/:recipeId', (req, res) => {
     .then(result => {
       const recipes = result.rows;
       res.status(201).json(recipes);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.post('/api/recipes', (req, res) => {
+  const { recipeTitle, imageUrl } = req.body;
+
+  const sql = `
+    insert into "recipes" ("recipeTitle", "imageUrl")
+    values ($1, $2)
+    returning *
+  `;
+  const params = [recipeTitle, imageUrl];
+  db.query(sql, params)
+    .then(result => {
+      const [recipe] = result.rows;
+      res.status(201).json(recipe);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.post('/api/ingredients', (req, res) => {
+  const { ingredient, recipeId }= req.body;
+
+  const sql = `
+    insert into "ingredients" ("ingredient", "recipeId")
+    values ($1, $2)
+    returning *
+  `;
+  const params = [ingredient, recipeId];
+  db.query(sql, params)
+    .then(result => {
+      const ing = result.rows;
+      res.status(201).json(ing);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.post('/api/steps', (req, res) => {
+  const { step, recipeId } = req.body;
+
+  const sql = `
+    insert into "recipeSteps" ("instruction", "recipeId")
+    values ($1, $2)
+    returning *
+  `;
+  const params = [step, recipeId];
+  db.query(sql, params)
+    .then(result => {
+      const step = result.rows;
+      res.status(201).json(step);
     })
     .catch(err => {
       console.error(err);
