@@ -5,19 +5,21 @@ body {
 .home {
   width: 26%;
   margin: auto;
-  margin-top: 3%;
+  padding-top: 2%;
   text-align: center;
   color: #fff;
 }
 
-.home h2,
-.home h5 {
+.home h2 {
   background-color: #c4c4c4;
-  padding: 2%;
+  margin-top: 5%;
+  padding: 1.5%;
+  margin-bottom: 0%;
 }
 
-.home h2 {
-  margin-bottom: 0%;
+.home h5 {
+  background-color: #c4c4c4;
+  padding: 1.5%;
 }
 
 .home img {
@@ -52,6 +54,7 @@ body {
 }
 
 .navbar-fas {
+  margin-top: 7%;
   margin-left: 17%;
   font-size: 1.7rem;
   cursor: pointer;
@@ -60,9 +63,10 @@ body {
 .search form{
   width: 80%;
   margin: auto;
+  padding-top: 5%;
 }
 
-.search {
+.search input{
   margin-top: 3%;
   border-radius: 4px;
   margin-left: 30%;
@@ -72,18 +76,21 @@ body {
 }
 
 .fas-search {
-  color: #6e6c6c;
-  padding: 2%;
+  margin-left: 9%;
+  position: absolute;
+  bottom: 3%;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.fas-search .fas{
+  margin-left: 17%;
 }
 
 .search-box{
   padding-top: 3%;
   width: 88%;
   margin: auto;
-}
-
-.search-img{
-  width: 20%;
 }
 
 .search-title{
@@ -128,6 +135,7 @@ body {
 .not-found {
   width: 20%;
   margin: auto;
+  margin-top: 5%;
   text-align: center;
   padding-top: 10%;
   font-weight: bold;
@@ -246,4 +254,24 @@ padding: 0.2rem 1rem;
 
 .card {
   width: 30%;
+}
+
+.page {
+  min-height: 'calc(100vh - 3.5rem)';
+}
+
+.page-content {
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+  min-height: '100%';
+}
+
+.col-12 > .p-3{
+  width: 100%;
+}
+
+.mb-2 {
+  color: salmon;
+  font-weight: 800;
 }

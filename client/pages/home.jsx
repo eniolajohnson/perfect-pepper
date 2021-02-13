@@ -1,8 +1,10 @@
 import React from 'react';
 import Converter from '../components/converter';
-import AllRecipes from '../pages/allRecipes';
+import AllRecipes from '../pages/all-recipes';
 import Search from '../pages/search';
 import Post from '../pages/post';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect'
 
 export default class Home extends React.Component {
   constructor() {
@@ -17,7 +19,7 @@ export default class Home extends React.Component {
       instructions: [],
       allRecipes: false,
       post: false,
-      search: false,
+      search: true,
       show: false,
       toggleOn: false,
       toggleOff: false
@@ -134,66 +136,28 @@ export default class Home extends React.Component {
   }
 
   render() {
-    if (this.state.allRecipes === true) {
+    const { user, handleSignOut } = this.context;
+    if (!user) return <Redirect to="sign-in" />;
+
+    if (user && this.state.allRecipes === true) {
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a href="#" className="navbar-brand header" onClick={this.handleHeaderClick}>
-                    perfect pepper </a>
-                </span>
-                <span className='header-span' onClick={this.handleMenuClick}>
-                  <i className="header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-          </header>
           <AllRecipes />
         </div>
       )
     }
 
-    if (this.state.post === true) {
+    if (user && this.state.post === true) {
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a href="#" className="navbar-brand header" onClick={this.handleHeaderClick}>
-                    perfect pepper
-           </a>
-                </span>
-                <span className='header-span' onClick={this.handleMenuClick}>
-                  <i className="header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-          </header>
           <Post />
         </div>
       )
     }
 
-    if (this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === false) {
+    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === false) {
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a href="#" className="navbar-brand header">
-                    perfect pepper
-              </a>
-                </span>
-                <span className='header-span' onClick={this.handleMenuClick}>
-                  <i className="header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-          </header>
           <div className='home'>
             <h2>Recipe of the day</h2>
             <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffullofplants.com%2Fwp-content%2Fuploads%2F2016%2F07%2Feasy-vegan-french-crepes-thumb-2.jpg&f=1&nofb=1" alt="crepes" />
@@ -217,107 +181,63 @@ export default class Home extends React.Component {
       );
     }
 
-    if (this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === true) {
+    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === true) {
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a href="#" className="navbar-brand header">
-                    perfect pepper
-              </a>
-                </span>
-                <span className='header-span' onClick={this.handleMenuClick}>
-                  <i className="header-fa header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-            <span className="dropdown">
-              <ul className="dropdown-content">
-                <li onClick={this.handleMetricClick}><a href="#metric">Metric Converter</a></li>
-                <li onClick={this.handleAllRecipes}><a href="#all-recipes">All Recipes</a></li>
-              </ul>
-            </span>
-          </header>
           <div className='home'>
             <h2>Recipe of the day</h2>
             <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffullofplants.com%2Fwp-content%2Fuploads%2F2016%2F07%2Feasy-vegan-french-crepes-thumb-2.jpg&f=1&nofb=1" alt="crepes" />
             <h5 className='pointer' onClick={this.displayRecipe}>{this.state.value}</h5>
           </div>
           <div className="navbar-container">
-            <i className="fas fa-home navbar-fas"></i>
+            <span onClick={this.handleHeaderClick}>
+              <i className="fas fa-home navbar-fas"></i>
+            </span>
             <span onClick={this.handleClick}>
               <i className="fas fa-search navbar-fas"></i>
             </span>
-            <i className="fas fa-plus navbar-fas"></i>
+            <span onClick={this.handlePostClick}>
+              <i className="fas fa-plus navbar-fas"></i>
+            </span>
             <i className="fas fa-user-circle navbar-fas"></i>
           </div>
         </div>
       );
     }
 
-    if (this.state.toggleOn === true && this.state.show === false && this.state.search === false && this.state.toggleOff === false) {
+    if (user && this.state.toggleOn === true && this.state.show === false && this.state.search === false && this.state.toggleOff === false) {
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a onClick={this.handleHeaderClick} href="#" className="navbar-brand header">
-                    perfect pepper
-              </a>
-                </span>
-                <span className='header-span' onClick={this.handleMenuClick}>
-                  <i className="header-fa header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-          </header>
           <Converter />
         </div>
       );
     }
 
-    if (this.state.search === true && this.state.show === false) {
+    if (user && this.state.search === true && this.state.show === false) {
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a onClick={this.handleHeaderClick} href="#" className="navbar-brand header">
-                    perfect pepper
-              </a>
-                </span>
-                <span className='header-span'>
-                  <i className="header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-          </header>
           <Search />
+          <div>
+            <div className="navbar-container fas-search">
+              <span onClick={this.handleHeaderClick}>
+                <i className="fas fa-home"></i>
+              </span>
+              <span onClick={this.handleClick}>
+                <i className="fas fa-search"></i>
+              </span>
+              <span onClick={this.handlePostClick}>
+                <i className="fas fa-plus"></i>
+              </span>
+              <i className="fas fa-user-circle"></i>
+            </div>
+          </div>
         </div>
       );
     }
-    if (this.state.search === false && this.state.show === true) {
+    if (user && this.state.search === false && this.state.show === true) {
       const { title, ingredients, instructions, url, recipeId } = this.state;
       return (
         <div>
-          <header>
-            <nav className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container">
-                <span className="col px-0">
-                  <a onClick={this.handleHeaderClick} href="#" className="navbar-brand header">
-                    perfect pepper
-              </a>
-                </span>
-                <span className='header-span'>
-                  <i className="header fas fa-bars"></i>
-                </span>
-              </div>
-            </nav>
-          </header>
           <div className='recipe' key={recipeId}>
             <img className='recipe-img' src={url} alt='recipe image' />
             <span className='recipe-title'>{title}</span>
@@ -334,3 +254,5 @@ export default class Home extends React.Component {
     }
   }
 }
+
+Home.contextType = AppContext;

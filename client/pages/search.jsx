@@ -1,4 +1,5 @@
 import React from 'react';
+import NotFound from '../pages/not-found';
 
 export default class search extends React.Component {
   constructor() {
@@ -78,8 +79,8 @@ export default class search extends React.Component {
   render(){
     if (this.state.isSubmitted === false){
       return (
-        <form onSubmit={this.handleSubmit}>
-          <input className="search" onChange={this.handleChange} type="text" placeholder='what will you like to cook?' value={this.state.value} />
+        <form className="search" onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} type="text" placeholder='what will you like to cook?' value={this.state.value} />
         </form>
       );
     }
@@ -88,20 +89,20 @@ export default class search extends React.Component {
       const found = this.state.found;
       if (found.length > 0){
         return (
-          <div className='search'>
-            <div key={found[0].recipeId}>
-              <div className='search-title' onClick={this.handleClick}>
-                <h5 key={found[0].recipeId}>{found[0].recipeTitle}</h5>
+          <span key={found[0].recipeId} className='all-recipes'>
+            <div className='card'>
+              <img className='card-img-top' src={found[0].imageUrl} alt={`an image of ${found[0].recipeTitle}`} />
+              <div className='card-body'>
+                <h5 className='card-title search-title' onClick={this.handleClick}>{found[0].recipeTitle}</h5>
               </div>
-              <img className='search-img' src={found[0].imageUrl} alt="recipe image" />
             </div>
-          </div>
+          </span>
         )}
       if (found.length < 1) {
         return (
           <div className='not-found'>
-          <h5>Uh-oh! Recipe not found</h5>
-          <a onClick={this.handleTryAgain} href="">Try again</a>
+          <NotFound />
+          <a onClick={this.handleTryAgain} href="">Search for another recipe</a>
           </div>
         )
       }
