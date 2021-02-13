@@ -19,7 +19,7 @@ export default class Home extends React.Component {
       instructions: [],
       allRecipes: false,
       post: false,
-      search: true,
+      search: false,
       show: false,
       toggleOn: false,
       toggleOff: false
@@ -151,6 +151,28 @@ export default class Home extends React.Component {
       return (
         <div>
           <Post />
+          <div id='nav' className="navbar-container fas-search">
+            <span onClick={this.handleHeaderClick}>
+              <i className="fas fa-home"></i>
+            </span>
+            <span onClick={this.handleClick}>
+              <i className="fas fa-search"></i>
+            </span>
+            <span onClick={this.handlePostClick}>
+              <i className="fas fa-plus"></i>
+            </span>
+            <span>
+              <span className='header-span' onClick={this.handleMenuClick}>
+                <i className="header-fa header fa-user-circle"></i>
+              </span>
+              <span className="dropdown">
+                <ul className="dropdown-content">
+                  <li onClick={this.handleMetricClick}><a href="#metric">Metric Converter</a></li>
+                  <li onClick={this.handleAllRecipes}><a href="#all-recipes">All Recipes</a></li>
+                </ul>
+              </span>
+            </span>
+          </div>
         </div>
       )
     }
@@ -173,9 +195,17 @@ export default class Home extends React.Component {
             <span onClick={this.handlePostClick}>
               <i className="fas fa-plus navbar-fas"></i>
             </span>
-            <span>
+
+              <span onClick={this.handleMenuClick}>
               <i className="fas fa-user-circle navbar-fas"></i>
-            </span>
+              </span>
+              {/* <span className="dropdown">
+                <ul className="dropdown-content">
+                  <li onClick={this.handleMetricClick}><a href="#metric">Metric Converter</a></li>
+                  <li onClick={this.handleAllRecipes}><a href="#all-recipes">All Recipes</a></li>
+                </ul>
+              </span> */}
+
           </div>
         </div>
       );
@@ -199,7 +229,17 @@ export default class Home extends React.Component {
             <span onClick={this.handlePostClick}>
               <i className="fas fa-plus navbar-fas"></i>
             </span>
-            <i className="fas fa-user-circle navbar-fas"></i>
+            <span>
+              <span className='header-span' onClick={this.handleMenuClick}>
+                <i className="header-fa header fa-user-circle"></i>
+              </span>
+              {/* <span className="dropdown">
+                <ul className="dropdown-content">
+                  <li onClick={this.handleMetricClick}><a href="#metric">Metric Converter</a></li>
+                  <li onClick={this.handleAllRecipes}><a href="#all-recipes">All Recipes</a></li>
+                </ul>
+              </span> */}
+            </span>
           </div>
         </div>
       );
@@ -217,8 +257,7 @@ export default class Home extends React.Component {
       return (
         <div>
           <Search />
-          <div>
-            <div className="navbar-container fas-search">
+            <div id='nav' className="navbar-container fas-search">
               <span onClick={this.handleHeaderClick}>
                 <i className="fas fa-home"></i>
               </span>
@@ -228,9 +267,18 @@ export default class Home extends React.Component {
               <span onClick={this.handlePostClick}>
                 <i className="fas fa-plus"></i>
               </span>
-              <i className="fas fa-user-circle"></i>
+            <span>
+              <span className='header-span' onClick={this.handleMenuClick}>
+                <i className="header-fa header fa-user-circle"></i>
+              </span>
+              {/* <span className="dropdown">
+                <ul className="dropdown-content">
+                  <li onClick={this.handleMetricClick}><a href="#metric">Metric Converter</a></li>
+                  <li onClick={this.handleAllRecipes}><a href="#all-recipes">All Recipes</a></li>
+                </ul>
+              </span> */}
+            </span>
             </div>
-          </div>
         </div>
       );
     }

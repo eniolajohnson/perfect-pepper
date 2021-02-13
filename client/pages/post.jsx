@@ -131,7 +131,9 @@ export default class Post extends React.Component{
             </div>
             <input onChange={this.handleChangeImage} type="text" name='image' value={this.state.imageUrl}  />
           </div>
-          <input type="submit" value='Submit'/>
+          <div className='post-container align'>
+            <button>Submit</button>
+          </div>
         </form>
       )
     }
@@ -158,7 +160,7 @@ export default class Post extends React.Component{
           <form onSubmit={this.handleSubmitIns}>
             <div>
               <p>Add the instructions for making the recipe.</p>
-              <p>When you are done, click the logo to head back to the homepage.</p>
+              <p>You can find your recipe using search!</p>
               <input type="text" value={this.state.text} onChange={this.handleChangeText} />
               <button onClick={this.handleSubmitIns}>Add</button>
             </div>

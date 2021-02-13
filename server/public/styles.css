@@ -5,6 +5,7 @@ body {
 .home {
   width: 26%;
   margin: auto;
+  margin-bottom: 3%;
   padding-top: 2%;
   text-align: center;
   color: #fff;
@@ -50,35 +51,44 @@ body {
 .navbar-container {
   width: 70%;
   margin: auto;
-  margin-top: 3%;
 }
 
 .navbar-fas {
-  margin-top: 7%;
+  margin-top: 8.6%;
   margin-left: 17%;
   font-size: 1.7rem;
   cursor: pointer;
 }
 
+.search {
+  min-height: 80vh;
+  padding-top: 3%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .search form{
-  width: 80%;
+  width: 77%;
   margin: auto;
   padding-top: 5%;
 }
 
 .search input{
-  margin-top: 3%;
   border-radius: 4px;
-  margin-left: 30%;
+  margin-left: 35%;
   width: 30%;
   border: 1px solid #c4c4c4;
   cursor: pointer;
 }
 
+div#nav{
+  margin: auto;
+  margin-top: 0;
+}
+
 .fas-search {
-  margin-left: 9%;
-  position: absolute;
-  bottom: 3%;
+  padding-top: 1.3%;
+  margin-left: 14%;
   font-size: 1.7rem;
   cursor: pointer;
 }
@@ -93,7 +103,10 @@ body {
   margin: auto;
 }
 
-.search-title{
+.search > .card{
+  margin: auto;
+  margin-bottom: 4%;
+  padding-top: 3.8%;
   font-size: 1.5rem;
   color: salmon;
   font-weight: bold;
@@ -101,7 +114,7 @@ body {
 }
 
 .recipe{
-  margin-top: 2%;
+  padding-top: 1%;
   width: 90%;
   margin-left: 6%;
 }
@@ -184,6 +197,7 @@ span.dropdown {
 }
 
 .converter label {
+  min-height: 100vh;
   font-weight: 800;
   color: rgb(138, 135, 135);
 }
@@ -203,17 +217,45 @@ span.dropdown {
 }
 
 .post-container {
-  width: 87%;
+  width: 100%;
   margin: auto;
-  padding-top: 5%;
+  padding: 7% 33%;
+  min-height: 28vh;
 }
+
 
 .post-container form{
   width: 20%;
 }
 
+.post-container.align{
+  text-align: end;
+  padding: 0;
+}
+
 .post-container label {
   font-weight: bold;
+  margin-left: 0.3rem;
+  margin-top: 0.6rem;
+}
+
+.post-container input {
+  border-radius: 4px;
+  width: 23.5rem;
+  border: 1px solid gray;
+  padding: 0.6rem 0;
+  margin-left: 0.3rem;
+}
+
+.post-container button {
+  margin-top: 0.6rem;
+  margin-left: 0.3rem;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid;
+  padding: 0.2rem 1rem;
 }
 
 .red {
@@ -222,6 +264,7 @@ span.dropdown {
 
 .post {
   width: 35%;
+  min-height: 80vh;
   margin: auto;
 }
 
@@ -246,7 +289,7 @@ padding: 0.2rem 1rem;
 
 .all-recipes {
   width: 100%;
-  margin-top: 1%;
+  padding-top: 5%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

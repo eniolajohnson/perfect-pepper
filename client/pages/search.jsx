@@ -89,7 +89,7 @@ export default class search extends React.Component {
       const found = this.state.found;
       if (found.length > 0){
         return (
-          <span key={found[0].recipeId} className='all-recipes'>
+          <span key={found[0].recipeId} className='search'>
             <div className='card'>
               <img className='card-img-top' src={found[0].imageUrl} alt={`an image of ${found[0].recipeTitle}`} />
               <div className='card-body'>

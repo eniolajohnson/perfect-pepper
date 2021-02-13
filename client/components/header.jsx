@@ -5,7 +5,7 @@ export default class Header extends React.Component {
   render() {
     const { user, handleSignOut } = this.context;
     return (
-      <nav className="navbar navbar-dark bg-dark shadow-sm">
+      <nav className="p-1 navbar navbar-dark bg-dark shadow-sm">
         <div className="container">
           <a href="#" className="navbar-brand header" >
             perfect pepper
