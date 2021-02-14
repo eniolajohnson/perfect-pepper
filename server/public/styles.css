@@ -29,7 +29,7 @@ body {
 }
 
 .header {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #fff;
   width: 80%;
 }
@@ -51,13 +51,19 @@ body {
 .navbar-container {
   width: 70%;
   margin: auto;
+  margin-right: 2%;
+  position: relative;
 }
 
 .navbar-fas {
   margin-top: 8.6%;
-  margin-left: 17%;
+  margin-right: 17%;
   font-size: 1.7rem;
   cursor: pointer;
+}
+
+.card {
+  width: 30%;
 }
 
 .search {
@@ -164,20 +170,28 @@ div#nav{
 }
 
 span.dropdown {
-  margin-right: 3%;
+  margin-right: 0;
   margin-bottom: 0;
 }
 
-.dropdown-content{
-  text-align: center;
-  background-color: #c4c4c4;
-  list-style-type: none;
-  float: right;
-  width: 12%;
-  padding: 0.3rem 0.3rem;
+.position {
+  position: relative;
+  width: 100%;
 }
 
-.dropdown-content li > a {
+.dropdown-content{
+  position: absolute;
+  bottom: 1.5rem;
+  left: 56%;
+  background-color: #c4c4c4;
+  list-style-type: none;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0;
+}
+
+.dropdown-content > p {
   text-decoration: none;
   font-size: 70%;
   color: #525252;
@@ -185,19 +199,40 @@ span.dropdown {
   font-weight: bold;
 }
 
-.dropdown a:hover {
+.circle-dropdown-content{
+  position: absolute;
+  bottom: 1.5rem;
+  left: 73%;
+  text-align: center;
+  background-color: #c4c4c4;
+  list-style-type: none;
+  float: right;
+  padding: 0.3rem 0.3rem;
+}
+
+.circle-dropdown-content > p {
+  font-size: 40%;
+  color: #525252;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dropdown-content > p:hover {
+  color: #ddd;
+}
+
+.circle-dropdown-content li > a:hover {
   color: #ddd;
 }
 
 .converter {
   width: 87%;
   margin: auto;
-  margin-top: 3%;
   padding-top: 3%;
+  min-height: 100vh;
 }
 
 .converter label {
-  min-height: 100vh;
   font-weight: 800;
   color: rgb(138, 135, 135);
 }
@@ -295,10 +330,6 @@ padding: 0.2rem 1rem;
   justify-content: center;
 }
 
-.card {
-  width: 30%;
-}
-
 .page {
   min-height: 'calc(100vh - 3.5rem)';
 }
@@ -314,7 +345,7 @@ padding: 0.2rem 1rem;
   width: 100%;
 }
 
-.mb-2 {
-  color: salmon;
+.welcome.mb-2 {
+  color: #a53131;
   font-weight: 800;
 }

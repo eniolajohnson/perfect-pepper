@@ -5,7 +5,7 @@ export default class Header extends React.Component {
   render() {
     const { user, handleSignOut } = this.context;
     return (
-      <nav className="p-1 navbar navbar-dark bg-dark shadow-sm">
+      <nav className="p-2 navbar navbar-dark bg-dark shadow-sm">
         <div className="container">
           <a href="#" className="navbar-brand header" >
             perfect pepper
@@ -13,16 +13,16 @@ export default class Header extends React.Component {
         <div>
             {user !== null &&
               <button className="btn btn-dark" onClick={handleSignOut}>
-                Sign out
-                <i className="ms-2 fas fa-sign-out-alt" />
+              Sign out
+                <i className="ms-2 fas fa-power-off" />
               </button>
             }
             {user === null &&
               <>
-                <a href="#sign-in" className="btn btn-primary">
+                <a href="#sign-in" className="welcome btn btn-primary">
                   Sign In
                 </a>
-                <a href="#sign-up" className="btn btn-dark">
+                <a href="#sign-up" className="welcome btn btn-dark">
                   Sign Up
                 </a>
               </>
@@ -35,3 +35,4 @@ export default class Header extends React.Component {
 }
 
 Header.contextType = AppContext;
+<i class="fas fa-power-off"></i>
