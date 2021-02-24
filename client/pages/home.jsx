@@ -10,13 +10,10 @@ export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: 'Crepes',
-      recipes: [],
-      title: '',
-      url: '',
-      recipeId: '',
+      recipe: [],
       ingredients: [],
       instructions: [],
+      isLoading: true,
       move: false,
       allRecipes: false,
       post: false,
@@ -36,35 +33,28 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/recipes`)
+    fetch(`/api/recipes/rotd`)
       .then(response => response.json())
-      .then(recipes => this.setState({
-        recipes
+      .then(recipe => this.setState({
+        recipe: recipe[0],
+        isLoading: false
       }))
       .catch(error => console.error('Fetch failed!', error));
   }
 
   displayRecipe() {
     this.setState({ show: true })
-    const title = this.state.value
-    const found = this.state.recipes.filter(recipe => recipe.recipeTitle.toLowerCase() === title.toLowerCase())
-    const id = found[0].recipeId
+    const id = this.state.recipe.recipeId
     fetch(`/api/recipes/${id}`)
       .then(response => response.json())
       .then(details => {
-        const title = details[0].recipeTitle
-        const recipeId = details[0].recipeId
-        const url = details[0].imageUrl
         const ing = details.map(detail => detail.ingredient)
         const ingredients = [... new Set(ing)]
         const ins = details.map(detail => detail.instruction)
         const instructions = [... new Set(ins)]
         this.setState({
-          title,
-          url,
           ingredients,
           instructions,
-          recipeId
         })
       })
       .catch(error => console.error('Fetch failed!', error));
@@ -181,13 +171,22 @@ export default class Home extends React.Component {
       )
     }
 
-    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === false) {
+    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === false && this.state.isLoading === true) {
+      return (
+        <div className='center'>
+          <img src="https://media.giphy.com/media/q15kbCtGFqwx8wYx1n/giphy.gif" alt="loading gif"/>
+        </div>
+      );
+    }
+
+    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === false && this.state.isLoading === false) {
+      const recipe = this.state.recipe;
       return (
         <div>
           <div className='home'>
             <h2>Recipe of the day</h2>
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffullofplants.com%2Fwp-content%2Fuploads%2F2016%2F07%2Feasy-vegan-french-crepes-thumb-2.jpg&f=1&nofb=1" alt="crepes" />
-            <h5 className='pointer' onClick={this.displayRecipe}>{this.state.value}</h5>
+            <img src={recipe.imageUrl} alt={recipe.recipeTitle} />
+            <h5 className='pointer' onClick={this.displayRecipe}>{recipe.recipeTitle}</h5>
           </div>
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
@@ -199,13 +198,14 @@ export default class Home extends React.Component {
             <span onClick={this.handlePostClick}>
               <i className="fas fa-plus navbar-fas"></i>
             </span>
-              <span onClick={this.handleMenuClick}>
+            <span onClick={this.handleMenuClick}>
               <i className="fas fa-user-circle navbar-fas"></i>
-              </span>
+            </span>
           </div>
         </div>
       );
     }
+
 
     if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === true) {
       return (
@@ -283,19 +283,34 @@ export default class Home extends React.Component {
       );
     }
     if (user && this.state.search === false && this.state.show === true) {
-      const { title, ingredients, instructions, url, recipeId } = this.state;
+      const { ingredients, instructions } = this.state;
+      const recipe = this.state.recipe;
       return (
         <div>
-          <div className='recipe' key={recipeId}>
-            <img className='recipe-img' src={url} alt='recipe image' />
-            <span className='recipe-title'>{title}</span>
+          <div className='recipe' key={recipe.recipeId}>
+            <img className='recipe-img' src={recipe.imageUrl} alt='recipe image' />
+            <span className='recipe-title'>{recipe.recipeTitle}</span>
             <hr />
             <h5 className='recipe-header'>INGREDIENTS</h5>
-            {ingredients.map(ingredient => <p className='recipe-text'>{ingredient}</p>)
+            {ingredients.map((ingredient, index) => <p className='recipe-text' key={index}>{ingredient}</p>)
             }
             <br />
             <h5 className='recipe-header'>DIRECTIONS</h5>
-            {instructions.map(step => <p className='recipe-text'> {step} </p>)}
+            {instructions.map((step, index) => <p className='recipe-text' key={index}> {step} </p>)}
+          </div>
+          <div id='nav' className="navbar-container fas-search">
+            <span onClick={this.handleHeaderClick}>
+              <i className="fas fa-home"></i>
+            </span>
+            <span onClick={this.handleClick}>
+              <i className="fas fa-search"></i>
+            </span>
+            <span onClick={this.handlePostClick}>
+              <i className="fas fa-plus"></i>
+            </span>
+            <span onClick={this.handleMenuClick}>
+              <i className="fas fa-user-circle"></i>
+            </span>
           </div>
         </div>
       );

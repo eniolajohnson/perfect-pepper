@@ -48,6 +48,17 @@ body {
   padding-top: 3%;
 }
 
+.center {
+  text-align: center;
+  margin-top: 20%;
+  background-color: #fcfeff
+}
+
+.center > img {
+  width: 10%;
+  height: 10%;
+}
+
 .navbar-container {
   width: 70%;
   margin: auto;
@@ -152,9 +163,9 @@ div#nav{
 }
 
 .not-found {
+  min-height: 80vh;
   width: 20%;
   margin: auto;
-  margin-top: 5%;
   text-align: center;
   padding-top: 10%;
   font-weight: bold;
@@ -314,12 +325,13 @@ span.dropdown {
 }
 
 .post button {
-cursor: pointer;
-border-radius: 4px;
-color: white;
-background-color: rgb(20, 20, 20);
-border: 1px solid;
-padding: 0.2rem 1rem;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid;
+  padding: 0.2rem 1rem;
 }
 
 .all-recipes {

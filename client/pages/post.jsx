@@ -11,6 +11,8 @@ export default class Post extends React.Component{
       newRecipe: [],
       getRecipe: false,
       title: false,
+      ingredientsArr: [],
+      instructionsArr: [],
       ingredients: false,
       steps: false
     }
@@ -43,7 +45,8 @@ export default class Post extends React.Component{
   handleSubmit() {
     this.setState({ ingredients: true })
     const id = this.state.recipes.length + 1;
-    this.setState({ id,
+    this.setState({
+      id,
       text: ''
      })
 
@@ -51,39 +54,44 @@ export default class Post extends React.Component{
       recipeTitle: this.state.text,
       imageUrl: this.state.imageUrl
     }
-    fetch(`/api/recipes`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newRecipe)
-    })
-      .then(response => response.json())
-      .then(newRecipe => this.setState({
-        newRecipe
-      }))
-      .catch(error => console.error('Fetch failed!', error));
+    // fetch(`/api/recipes`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(newRecipe)
+    // })
+    //   .then(response => response.json())
+    //   .then(newRecipe => this.setState({
+    //     newRecipe
+    //   }))
+    //   .catch(error => console.error('Fetch failed!', error));
   }
 
   handleSubmitIng() {
     event.preventDefault();
-    this.setState({ text: ''})
+    const ingredientsArr = []
+    ingredientsArr.push(this.state.text)
+    this.setState({
+      ingredientsArr: [...this.state.ingredientsArr, ingredientsArr],
+      text: ''
+    })
 
     const newIngredient = {
       ingredient: this.state.text,
       recipeId: this.state.id
     };
 
-    fetch(`/api/ingredients`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newIngredient)
-    })
-      .then(response => response.json())
-      .then(newIngredient => newIngredient)
-      .catch(error => console.error('Fetch failed!', error));
+    // fetch(`/api/ingredients`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(newIngredient)
+    // })
+    //   .then(response => response.json())
+    //   .then(newIngredient => newIngredient)
+    //   .catch(error => console.error('Fetch failed!', error));
   }
 
   handleDone() {
@@ -95,7 +103,12 @@ export default class Post extends React.Component{
 
   handleSubmitIns() {
     event.preventDefault();
-    this.setState({ text: '' })
+    const instructionsArr = []
+    instructionsArr.push(this.state.text)
+    this.setState({
+      instructionsArr: [...this.state.instructionsArr, instructionsArr],
+      text: ''
+    })
 
     const newInstruction = {
       step: this.state.text,
@@ -139,6 +152,7 @@ export default class Post extends React.Component{
     }
 
     if (title === false && ingredients === true && steps === false) {
+      const { ingredientsArr } = this.state;
       return (
         <div className='post'>
           <form onSubmit={this.handleSubmitIng}>
@@ -147,6 +161,8 @@ export default class Post extends React.Component{
               <p>When you are done, click the 'done' button</p>
               <input type="text" value={this.state.text} onChange={this.handleChangeText} />
               <button onClick={this.handleSubmitIng}> Add </button>
+              {ingredientsArr.map((ingredient, index) => <p className='recipe-text' key={index}>{ingredient}</p>)
+              }
             </div>
           </form>
           <button onClick={this.handleDone}>Done</button>
@@ -155,6 +171,7 @@ export default class Post extends React.Component{
     }
 
     if (title === false && ingredients === false && steps === true) {
+      const { instructionsArr } = this.state;
       return (
         <div className='post'>
           <form onSubmit={this.handleSubmitIns}>
@@ -163,6 +180,8 @@ export default class Post extends React.Component{
               <p>You can find your recipe using search!</p>
               <input type="text" value={this.state.text} onChange={this.handleChangeText} />
               <button onClick={this.handleSubmitIns}>Add</button>
+              {instructionsArr.map((instruction, index) => <p className='recipe-text' key={index}>{instruction}</p>)
+              }
             </div>
           </form>
         </div>

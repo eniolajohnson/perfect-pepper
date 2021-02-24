@@ -55,6 +55,29 @@ app.get('/api/ingredients', (req, res) => {
     });
 });
 
+app.get('/api/recipes/rotd', (req, res) => {
+  const recipeId = Math.round(Math.random() * 12)
+  const sql = `
+    select *
+      from "recipes"
+     where "recipeId" = $1
+  `;
+
+  const params = [recipeId]
+
+  db.query(sql, params)
+    .then(result => {
+      const recipe = result.rows
+      res.json(recipe);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.get('/api/recipes/:recipeId', (req, res) => {
   const recipeId = parseInt(req.params.recipeId, 10);
   if (!Number.isInteger(recipeId) || recipeId < 1) {
