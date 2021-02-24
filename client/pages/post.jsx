@@ -54,18 +54,18 @@ export default class Post extends React.Component{
       recipeTitle: this.state.text,
       imageUrl: this.state.imageUrl
     }
-    // fetch(`/api/recipes`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(newRecipe)
-    // })
-    //   .then(response => response.json())
-    //   .then(newRecipe => this.setState({
-    //     newRecipe
-    //   }))
-    //   .catch(error => console.error('Fetch failed!', error));
+    fetch(`/api/recipes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newRecipe)
+    })
+      .then(response => response.json())
+      .then(newRecipe => this.setState({
+        newRecipe
+      }))
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   handleSubmitIng() {
@@ -82,16 +82,16 @@ export default class Post extends React.Component{
       recipeId: this.state.id
     };
 
-    // fetch(`/api/ingredients`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(newIngredient)
-    // })
-    //   .then(response => response.json())
-    //   .then(newIngredient => newIngredient)
-    //   .catch(error => console.error('Fetch failed!', error));
+    fetch(`/api/ingredients`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newIngredient)
+    })
+      .then(response => response.json())
+      .then(newIngredient => newIngredient)
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   handleDone() {
