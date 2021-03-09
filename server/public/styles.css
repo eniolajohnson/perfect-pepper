@@ -34,6 +34,37 @@ body {
   width: 80%;
 }
 
+@media screen and (max-width: 780px) {
+    .container.page {
+      height: 92vh;
+    }
+    .navbar-brand.header {
+      font-size: 100%;
+      width: 0;
+    }
+    .btn.btn-dark{
+      font-size: 90%;
+    }
+    .home {
+      margin-bottom: 2.5%;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home {
+      margin-bottom: 28%;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .home {
+      margin-bottom: 23%;
+      width: 100%;
+    }
+}
+
 .header a {
   text-decoration: none;
 }
@@ -71,6 +102,18 @@ body {
   margin-right: 17%;
   font-size: 1.7rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+    .navbar-container {
+      text-align: center;
+      width: 100%;
+      margin-left: 5%;
+      font-size: 80%;
+    }
+    .navbar-fas{
+      margin-right: 14%;
+    }
 }
 
 .card {
@@ -113,6 +156,7 @@ body {
   width: 30%;
   border: 1px solid #c4c4c4;
   cursor: pointer;
+  text-align: center;
 }
 
 div#nav{
@@ -127,6 +171,49 @@ div#nav{
   cursor: pointer;
 }
 
+@media screen and (max-width: 780px) {
+    .search{
+      min-height: 90vh;
+    }
+    .navbar-container.fas-search {
+      text-align: left;
+      font-size: 80%;
+      width: 100%;
+    }
+    .search input {
+      text-align: center;
+      width: 35%;
+    }
+    .fas-search {
+      padding-left: 5%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    form.search{
+      text-align: center;
+    }
+    .search{
+      min-height: 87vh;
+    }
+    .search input {
+      margin-left: 0;
+      text-align: center;
+      width: 55%;
+      font-size: 70%;
+    }
+    .fas-search {
+      padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .navbar-container.fas-search {
+      text-align: left;
+      font-size: 80%;
+    }
+}
+
 .fas-search .fas{
   margin-left: 17%;
 }
@@ -138,8 +225,9 @@ div#nav{
 }
 
 .search > .card{
-  margin: auto;
-  margin-bottom: 4%;
+  text-align: center;
+  width: 30%;
+  height: 87%;
   padding-top: 3.8%;
   font-size: 1.5rem;
   color: salmon;
@@ -147,10 +235,57 @@ div#nav{
   cursor: pointer;
 }
 
+.search.all-recipes{
+  height: 81vh;
+}
+
+@media screen and (max-width: 780px) {
+    .container.page {
+      height: 95vh;
+    }
+    .search > .card{
+      margin-bottom: 0;
+      height: 30%;
+    }
+    .card{
+      height: 38%;
+      width: 40%;
+    }
+    .card-title{
+      text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card-title{
+      font-size: 50%;
+    }
+    .search > .card{
+      margin-bottom: 0;
+      height: 50%;
+      width: 70%;
+    }
+    .search.all-recipes{
+      margin-bottom: 2%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search.all-recipes{
+      margin-bottom: 5%;
+    }
+}
+
 .recipe{
   padding-top: 1%;
   width: 90%;
   margin-left: 6%;
+}
+
+@media screen and (max-width: 780px) {
+    .recipe {
+      min-height: 92vh;
+    }
 }
 
 .recipe-img{
@@ -173,6 +308,21 @@ div#nav{
 .recipe-text{
   font-size: 0.8rem;
   color: #525252;
+}
+
+@media screen and (max-width: 480px) {
+    .recipe{
+      min-height: 88vh;
+    }
+    .recipe-text {
+      font-size: 60%;
+    }
+    .recipe-img{
+      width: 25%;
+    }
+    .recipe-title{
+      font-size: 80%;
+    }
 }
 
 .pointer {
@@ -275,6 +425,25 @@ span.dropdown {
   padding: 0.2rem 1rem;
 }
 
+@media screen and (max-width: 780px) {
+    .converter{
+      min-height: 84vh;
+      margin-left: 1%;
+      width: 100%;
+    }
+    .converter > form input{
+      border: 1px solid grey;
+      margin: 1%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .converter{
+      min-height: 82vh;
+    }
+}
+
+
 .plus {
   text-align: center;
 }
@@ -285,7 +454,6 @@ span.dropdown {
   padding: 7% 33%;
   min-height: 28vh;
 }
-
 
 .post-container form{
   width: 20%;
@@ -325,6 +493,39 @@ span.dropdown {
   color: red;
 }
 
+@media screen and (max-width: 780px) {
+    .post-container{
+      width: 80%;
+      min-height: 65vh;
+      padding-left: 0%;
+      padding-right: 0;
+      text-align: center;
+    }
+    .post-container input{
+      width: 80%;
+    }
+    .post-container label{
+      margin-top: 0.8rem;
+      font-size: 100%;
+    }
+    .post-container.align{
+      text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post-container{
+      min-height: 56vh;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .post-container{
+      min-height: 49vh;
+    }
+}
+
+
 .post {
   width: 35%;
   min-height: 80vh;
@@ -349,6 +550,36 @@ span.dropdown {
   background-color: rgb(20, 20, 20);
   border: 1px solid;
   padding: 0.2rem 1rem;
+}
+
+@media screen and (max-width: 780px) {
+    .post{
+      min-height: 90vh;
+      margin: auto;
+      padding: 0;
+      width: 80%;
+    }
+    .post input{
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post{
+      min-height: 87vh;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post{
+      min-height: 85vh;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
 }
 
 .all-recipes {

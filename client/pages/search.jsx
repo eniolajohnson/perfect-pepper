@@ -33,20 +33,30 @@ export default class search extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value })
+    this.setState({ value: event.target.value });
+    const title = this.state.value;
+    const recipes = this.state.recipes;
+    const foundArr = [];
+    recipes.map(recipe => {
+      if (recipe.recipeTitle.toLowerCase().match(title)) {
+        foundArr.push(recipe);
+        this.setState({ found: foundArr })
+      }
+    })
   }
 
   handleSubmit(event) {
     this.setState({ isSubmitted: true})
     event.preventDefault();
-    const title = this.state.value
-    const found = this.state.recipes.filter(recipe => recipe.recipeTitle.toLowerCase() === title.toLowerCase())
-    this.setState({ found })
   }
 
-  handleClick(){
-    this.setState({ display:true })
-    const id = this.state.found[0].recipeId
+  handleClick(e) {
+    this.setState({ display: true })
+    const text = e.target.textContent;
+    const find = this.state.found.filter(find => {
+      return find.recipeTitle === text ? find.recipeId : null;
+    })
+    const id = find[0].recipeId;
     fetch(`/api/recipes/${id}`)
       .then(response => response.json())
       .then(details => {
@@ -76,28 +86,32 @@ export default class search extends React.Component {
     })
   }
 
-  render(){
+  render() {
     if (this.state.isSubmitted === false){
       return (
         <form className="search" onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" placeholder='what will you like to cook?' value={this.state.value} />
+          <input onChange={this.handleChange} type="text" placeholder='what will you like to make?' value={this.state.value} />
         </form>
       );
     }
 
     if (this.state.isSubmitted === true && this.state.display === false) {
       const found = this.state.found;
-      if (found.length > 0){
+      if (found.length > 0) {
         return (
-          <span key={found[0].recipeId} className='search'>
-            <div className='card'>
-              <img className='card-img-top' src={found[0].imageUrl} alt={`an image of ${found[0].recipeTitle}`} />
-              <div className='card-body'>
-                <h5 className='card-title search-title' onClick={this.handleClick}>{found[0].recipeTitle}</h5>
-              </div>
-            </div>
-          </span>
-        )}
+          <div className='search all-recipes'>
+            {found.map((recipeFound, index) => {
+              return (
+                <div className='card' key={index}>
+                  <img className='card-img-top' src={recipeFound.imageUrl} alt={`an image of ${recipeFound.recipeTitle}`} onClick={this.handleClick} />
+                  <h5 className='card-title' onClick={this.handleClick}>{recipeFound.recipeTitle}</h5>
+                </div>
+              )
+            }
+            )}
+          </div>)}
+
+
       if (found.length < 1) {
         return (
           <div className='not-found'>

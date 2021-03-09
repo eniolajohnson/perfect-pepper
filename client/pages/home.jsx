@@ -208,12 +208,13 @@ export default class Home extends React.Component {
 
 
     if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === true) {
+      const recipe = this.state.recipe;
       return (
         <div>
           <div className='home'>
             <h2>Recipe of the day</h2>
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffullofplants.com%2Fwp-content%2Fuploads%2F2016%2F07%2Feasy-vegan-french-crepes-thumb-2.jpg&f=1&nofb=1" alt="crepes" />
-            <h5 className='pointer' onClick={this.displayRecipe}>{this.state.value}</h5>
+            <img src={recipe.imageUrl} alt={recipe.recipeTitle} />
+            <h5 className='pointer' onClick={this.displayRecipe}>{recipe.recipeTitle}</h5>
           </div>
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
