@@ -4,18 +4,17 @@ export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      username: 'Sarah',
+      password: 'Sarah'
     };
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-
-  }
+  // handleChange(event) {
+  //   const { name, value } = event.target;
+  //   this.setState({ [name]: value });
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -57,12 +56,14 @@ export default class AuthForm extends React.Component {
             Username
           </label>
           <input
+            disabled="disabled"
             required
             autoFocus
             id="username"
             type="text"
             name="username"
-            onChange={handleChange}
+            value='Sarah'
+            // onChange={handleChange}
             className="form-control bg-light" />
         </div>
         <div className="mb-3">
@@ -71,10 +72,12 @@ export default class AuthForm extends React.Component {
           </label>
           <input
             required
+            disabled="disabled"
             id="password"
             type="password"
             name="password"
-            onChange={handleChange}
+            value='Sarah'
+            // onChange={handleChange}
             className="form-control bg-light" />
         </div>
         <div className="d-flex justify-content-between align-items-center">
