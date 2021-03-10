@@ -8,11 +8,9 @@ create schema "public";
 
 CREATE TABLE "users" (
 	"userId" serial NOT NULL,
-	"firstName" TEXT NOT NULL,
-	"lastName" TEXT NOT NULL,
-	"password" TEXT NOT NULL,
-	"email" TEXT NOT NULL,
-	"createdAt" TIMESTAMP NOT NULL,
+	"username" TEXT NOT NULL,
+	"hashedPassword" TEXT NOT NULL,
+	"createdAt" TIMESTAMP,
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
 ) WITH (
   OIDS=FALSE
@@ -51,14 +49,6 @@ CREATE TABLE "recipeSteps" (
 ) WITH (
   OIDS=FALSE
 );
-
-
-
-
-
-ALTER TABLE "ingredients" ADD CONSTRAINT "ingredients_fk0" FOREIGN KEY ("recipeId") REFERENCES "recipes"("recipeId");
-
-ALTER TABLE "recipeSteps" ADD CONSTRAINT "recipeSteps_fk0" FOREIGN KEY ("recipeId") REFERENCES "recipes"("recipeId");
 
 
 

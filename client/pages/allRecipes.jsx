@@ -54,17 +54,17 @@ export default class AllRecipes extends React.Component {
   render() {
     if (this.state.display === false) {
       return (
-        <div>
+        <div className='all-recipes'>
           {this.state.recipes.map(recipe => {
             return (
-              <span key={recipe.recipeId} className='all-recipes'>
+
                 <div className='card'>
                   <img className='card-img-top' src={recipe.imageUrl} alt={`an image of ${recipe.recipeTitle}`} />
                   <div className='card-body'>
                     <h5 className='card-title' onClick={this.handleClick}>{recipe.recipeTitle}</h5>
                   </div>
                 </div>
-              </span>
+
             )
           })}
         </div>

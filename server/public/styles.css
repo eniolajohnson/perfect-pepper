@@ -5,19 +5,22 @@ body {
 .home {
   width: 26%;
   margin: auto;
-  margin-top: 3%;
+  margin-bottom: 3%;
+  padding-top: 2%;
   text-align: center;
   color: #fff;
 }
 
-.home h2,
-.home h5 {
+.home h2 {
   background-color: #c4c4c4;
-  padding: 2%;
+  margin-top: 5%;
+  padding: 1.5%;
+  margin-bottom: 0%;
 }
 
-.home h2 {
-  margin-bottom: 0%;
+.home h5 {
+  background-color: #c4c4c4;
+  padding: 1.5%;
 }
 
 .home img {
@@ -26,9 +29,40 @@ body {
 }
 
 .header {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #fff;
   width: 80%;
+}
+
+@media screen and (max-width: 780px) {
+    .container.page {
+      height: 92vh;
+    }
+    .navbar-brand.header {
+      font-size: 100%;
+      width: 0;
+    }
+    .btn.btn-dark{
+      font-size: 90%;
+    }
+    .home {
+      margin-bottom: 2.5%;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home {
+      margin-bottom: 28%;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .home {
+      margin-bottom: 23%;
+      width: 100%;
+    }
 }
 
 .header a {
@@ -45,35 +79,143 @@ body {
   padding-top: 3%;
 }
 
+.center {
+  text-align: center;
+  margin-top: 20%;
+  background-color: #fcfeff
+}
+
+.center > img {
+  width: 10%;
+  height: 10%;
+}
+
 .navbar-container {
   width: 70%;
   margin: auto;
-  margin-top: 3%;
+  margin-right: 2%;
+  position: relative;
 }
 
 .navbar-fas {
-  margin-left: 17%;
+  margin-top: 8.6%;
+  margin-right: 17%;
   font-size: 1.7rem;
   cursor: pointer;
 }
 
-.search form{
-  width: 80%;
-  margin: auto;
+@media screen and (max-width: 780px) {
+    .navbar-container {
+      text-align: center;
+      width: 100%;
+      margin-left: 5%;
+      font-size: 80%;
+    }
+    .navbar-fas{
+      margin-right: 14%;
+    }
 }
 
-.search {
-  margin-top: 3%;
-  border-radius: 4px;
-  margin-left: 30%;
-  width: 30%;
-  border: 1px solid #c4c4c4;
+.card {
+  width: 18%;
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
+.card-body{
+  padding: .5rem .5rem;
+  text-align: center;
+}
+
+.card-title{
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.card-title:hover{
+  color: salmon;
   cursor: pointer;
 }
 
+.search {
+  min-height: 80vh;
+  padding-top: 3%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.search form{
+  width: 77%;
+  margin: auto;
+  padding-top: 5%;
+}
+
+.search input{
+  border-radius: 4px;
+  margin-left: 35%;
+  width: 30%;
+  border: 1px solid #c4c4c4;
+  cursor: pointer;
+  text-align: center;
+}
+
+div#nav{
+  margin: auto;
+  margin-top: 0;
+}
+
 .fas-search {
-  color: #6e6c6c;
-  padding: 2%;
+  padding-top: 1.3%;
+  margin-left: 14%;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+    .search{
+      min-height: 90vh;
+    }
+    .navbar-container.fas-search {
+      text-align: left;
+      font-size: 80%;
+      width: 100%;
+    }
+    .search input {
+      text-align: center;
+      width: 35%;
+    }
+    .fas-search {
+      padding-left: 5%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    form.search{
+      text-align: center;
+    }
+    .search{
+      min-height: 87vh;
+    }
+    .search input {
+      margin-left: 0;
+      text-align: center;
+      width: 55%;
+      font-size: 70%;
+    }
+    .fas-search {
+      padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .navbar-container.fas-search {
+      text-align: left;
+      font-size: 80%;
+    }
+}
+
+.fas-search .fas{
+  margin-left: 17%;
 }
 
 .search-box{
@@ -82,21 +224,68 @@ body {
   margin: auto;
 }
 
-.search-img{
-  width: 20%;
-}
-
-.search-title{
+.search > .card{
+  text-align: center;
+  width: 30%;
+  height: 87%;
+  padding-top: 3.8%;
   font-size: 1.5rem;
   color: salmon;
   font-weight: bold;
   cursor: pointer;
 }
 
+.search.all-recipes{
+  height: 81vh;
+}
+
+@media screen and (max-width: 780px) {
+    .container.page {
+      height: 95vh;
+    }
+    .search > .card{
+      margin-bottom: 0;
+      height: 30%;
+    }
+    .card{
+      height: 38%;
+      width: 40%;
+    }
+    .card-title{
+      text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card-title{
+      font-size: 50%;
+    }
+    .search > .card{
+      margin-bottom: 0;
+      height: 50%;
+      width: 70%;
+    }
+    .search.all-recipes{
+      margin-bottom: 2%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search.all-recipes{
+      margin-bottom: 5%;
+    }
+}
+
 .recipe{
-  margin-top: 2%;
+  padding-top: 1%;
   width: 90%;
   margin-left: 6%;
+}
+
+@media screen and (max-width: 780px) {
+    .recipe {
+      min-height: 92vh;
+    }
 }
 
 .recipe-img{
@@ -121,11 +310,27 @@ body {
   color: #525252;
 }
 
+@media screen and (max-width: 480px) {
+    .recipe{
+      min-height: 88vh;
+    }
+    .recipe-text {
+      font-size: 60%;
+    }
+    .recipe-img{
+      width: 25%;
+    }
+    .recipe-title{
+      font-size: 80%;
+    }
+}
+
 .pointer {
   cursor: pointer;
 }
 
 .not-found {
+  min-height: 80vh;
   width: 20%;
   margin: auto;
   text-align: center;
@@ -143,20 +348,28 @@ body {
 }
 
 span.dropdown {
-  margin-right: 3%;
+  margin-right: 0;
   margin-bottom: 0;
 }
 
-.dropdown-content{
-  text-align: center;
-  background-color: #c4c4c4;
-  list-style-type: none;
-  float: right;
-  width: 12%;
-  padding: 0.3rem 0.3rem;
+.position {
+  position: relative;
+  width: 100%;
 }
 
-.dropdown-content li > a {
+.dropdown-content{
+  position: absolute;
+  bottom: 1.5rem;
+  left: 56%;
+  background-color: #c4c4c4;
+  list-style-type: none;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0;
+}
+
+.dropdown-content > p {
   text-decoration: none;
   font-size: 70%;
   color: #525252;
@@ -164,15 +377,37 @@ span.dropdown {
   font-weight: bold;
 }
 
-.dropdown a:hover {
+.circle-dropdown-content{
+  position: absolute;
+  bottom: 1.5rem;
+  left: 73%;
+  text-align: center;
+  background-color: #c4c4c4;
+  list-style-type: none;
+  float: right;
+  padding: 0.3rem 0.3rem;
+}
+
+.circle-dropdown-content > p {
+  font-size: 40%;
+  color: #525252;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dropdown-content > p:hover {
+  color: #ddd;
+}
+
+.circle-dropdown-content li > a:hover {
   color: #ddd;
 }
 
 .converter {
   width: 87%;
   margin: auto;
-  margin-top: 3%;
   padding-top: 3%;
+  min-height: 100vh;
 }
 
 .converter label {
@@ -190,30 +425,110 @@ span.dropdown {
   padding: 0.2rem 1rem;
 }
 
+@media screen and (max-width: 780px) {
+    .converter{
+      min-height: 84vh;
+      margin-left: 1%;
+      width: 100%;
+    }
+    .converter > form input{
+      border: 1px solid grey;
+      margin: 1%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .converter{
+      min-height: 82vh;
+    }
+}
+
+
 .plus {
   text-align: center;
 }
 
 .post-container {
-  width: 87%;
+  width: 100%;
   margin: auto;
-  padding-top: 5%;
+  padding: 7% 33%;
+  min-height: 28vh;
 }
 
 .post-container form{
   width: 20%;
 }
 
+.post-container.align{
+  text-align: end;
+  padding: 0;
+}
+
 .post-container label {
   font-weight: bold;
+  margin-left: 0.3rem;
+  margin-top: 0.6rem;
+}
+
+.post-container input {
+  border-radius: 4px;
+  width: 23.5rem;
+  border: 1px solid gray;
+  padding: 0.6rem 0;
+  margin-left: 0.3rem;
+}
+
+.post-container button {
+  margin-top: 0.6rem;
+  margin-left: 0.3rem;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid;
+  padding: 0.2rem 1rem;
 }
 
 .red {
   color: red;
 }
 
+@media screen and (max-width: 780px) {
+    .post-container{
+      width: 80%;
+      min-height: 65vh;
+      padding-left: 0%;
+      padding-right: 0;
+      text-align: center;
+    }
+    .post-container input{
+      width: 80%;
+    }
+    .post-container label{
+      margin-top: 0.8rem;
+      font-size: 100%;
+    }
+    .post-container.align{
+      text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post-container{
+      min-height: 56vh;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .post-container{
+      min-height: 49vh;
+    }
+}
+
+
 .post {
   width: 35%;
+  min-height: 80vh;
   margin: auto;
 }
 
@@ -228,22 +543,67 @@ span.dropdown {
 }
 
 .post button {
-cursor: pointer;
-border-radius: 4px;
-color: white;
-background-color: rgb(20, 20, 20);
-border: 1px solid;
-padding: 0.2rem 1rem;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid;
+  padding: 0.2rem 1rem;
+}
+
+@media screen and (max-width: 780px) {
+    .post{
+      min-height: 90vh;
+      margin: auto;
+      padding: 0;
+      width: 80%;
+    }
+    .post input{
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post{
+      min-height: 87vh;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post{
+      min-height: 85vh;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
 }
 
 .all-recipes {
-  width: 100%;
-  margin-top: 1%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.card {
-  width: 30%;
+.page {
+  min-height: 'calc(100vh - 3.5rem)';
+}
+
+.page-content {
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+  min-height: '100%';
+}
+
+.col-12 > .p-3{
+  width: 100%;
+}
+
+.welcome.mb-2 {
+  color: #a53131;
+  font-weight: 800;
 }

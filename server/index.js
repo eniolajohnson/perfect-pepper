@@ -1,14 +1,17 @@
 require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
-
+const argon2 = require('argon2');
 const pg = require('pg');
-
-const app = express();
+const jwt = require('jsonwebtoken');
+const ClientError = require('./client-error');
+const errorMiddleware = require('./error-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL
 });
+
+const app = express();
 
 app.use(staticMiddleware);
 
@@ -52,6 +55,29 @@ app.get('/api/ingredients', (req, res) => {
     });
 });
 
+app.get('/api/recipes/rotd', (req, res) => {
+  const recipeId = Math.round(Math.random() * 12)
+  const sql = `
+    select *
+      from "recipes"
+     where "recipeId" = $1
+  `;
+
+  const params = [recipeId]
+
+  db.query(sql, params)
+    .then(result => {
+      const recipe = result.rows
+      res.json(recipe);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.get('/api/recipes/:recipeId', (req, res) => {
   const recipeId = parseInt(req.params.recipeId, 10);
   if (!Number.isInteger(recipeId) || recipeId < 1) {
@@ -61,23 +87,6 @@ app.get('/api/recipes/:recipeId', (req, res) => {
     return;
   }
 
-  // const sql = `
-  // select *
-  //   from "recipeSteps"
-  //   join "ingredients" using("recipeId")
-  //   where "recipeId" = $1
-  //   order by "recipeSteps"."stepId"
-  //   `;
-
-  // const sql = `
-  //   select "recipeSteps"."instruction",
-  //           "ingredients"."ingredient"
-  //   from "recipes"
-  //   join "ingredients" using("recipeId")
-  //   join "recipeSteps" using("recipeId")
-  //   where "recipeId" = $1
-  // `;
-
   const sql = `
     select *
     from "recipes"
@@ -85,40 +94,6 @@ app.get('/api/recipes/:recipeId', (req, res) => {
     join "recipeSteps" using("recipeId")
     where "recipeId" = $1
   `;
-
-//   const sql = `
-//   with "ingredients" as (
-//       select r."recipeId", array_to_json(array_agg(json_build_object('ingredient', r."ingredient"))) as matching
-//       from (
-//         select
-//           "recipeId",
-//           i."ingredient"
-//         from "ingredients" i
-//         join recipes using ("recipeId")
-//         where (i."ingredient" is not null)
-//       ) as r
-//       group by r."recipeId"
-//     ),
-// "steps" as (
-//       select s."recipeId", array_to_json(array_agg(json_build_object('step', s."instruction"))) as matching
-//       from (
-//         select
-//           rs."recipeId",
-//           "instruction"
-//         from "recipeSteps" rs
-//         join recipes using ("recipeId")
-//       ) as s
-//       group by s."recipeId"
-// )
-//     select
-//       r."recipeId",
-//       r."recipeTitle",
-//       r."imageUrl",
-//       coalesce((select matching from "ingredients" where "ingredients"."recipeId" = r."recipeId"), '[]'::json) as ingredients,
-//       coalesce((select matching from "steps" where "steps"."recipeId" = r."recipeId"), '[]'::json) as steps
-//     from "recipes" r
-//     where r."recipeId" = $1;
-//   `;
 
   const params = [recipeId]
 
@@ -200,6 +175,64 @@ app.post('/api/steps', (req, res) => {
       });
     });
 });
+
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'username and password are required fields');
+  }
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+        insert into "users" ("username", "hashedPassword")
+        values ($1, $2)
+        returning "userId", "username", "createdAt"
+      `;
+      const params = [username, hashedPassword];
+      return db.query(sql, params);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      res.status(201).json(user);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+    select "userId",
+           "hashedPassword"
+      from "users"
+     where "username" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
+});
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
