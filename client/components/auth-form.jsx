@@ -7,14 +7,9 @@ export default class AuthForm extends React.Component {
       username: 'Sarah',
       password: 'Sarah'
     };
-    // this.handleChange = this.handleChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // handleChange(event) {
-  //   const { name, value } = event.target;
-  //   this.setState({ [name]: value });
-  // }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -77,7 +72,6 @@ export default class AuthForm extends React.Component {
             type="password"
             name="password"
             value='Sarah'
-            // onChange={handleChange}
             className="form-control bg-light" />
         </div>
         <div className="d-flex justify-content-between align-items-center">
