@@ -131,16 +131,16 @@ export default class Home extends React.Component {
           <AllRecipes />
           <div id='nav' className="navbar-container fas-search">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
             </span>
 
           </div>
@@ -154,16 +154,16 @@ export default class Home extends React.Component {
           <Post />
           <div id='nav' className="navbar-container fas-search">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
             </span>
 
           </div>
@@ -190,16 +190,18 @@ export default class Home extends React.Component {
           </div>
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home navbar-fas"></i>
+
+              <i className="fas fa-home navbar-fas" data-title='home'>
+              </i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search navbar-fas"></i>
+              <i className="fas fa-search navbar-fas" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus navbar-fas"></i>
+              <i className="fas fa-plus navbar-fas" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle navbar-fas"></i>
+              <i className="fas fa-user-circle navbar-fas" data-title='menu'></i>
             </span>
           </div>
         </div>
@@ -218,16 +220,16 @@ export default class Home extends React.Component {
           </div>
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home navbar-fas"></i>
+              <i className="fas fa-home navbar-fas" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search navbar-fas"></i>
+              <i className="fas fa-search navbar-fas" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus navbar-fas"></i>
+              <i className="fas fa-plus navbar-fas" data-title='new post'></i>
             </span>
               <span onClick={this.handleMenuClick}>
-                <i className="fas fa-user-circle navbar-fas"></i>
+              <i className="fas fa-user-circle navbar-fas" data-title='menu'></i>
                 <ul className="dropdown-content">
                 <p onClick={this.handleMetricClick}>Metric Converter</p>
                 <p onClick={this.handleAllRecipes}>All Recipes</p>
@@ -245,18 +247,17 @@ export default class Home extends React.Component {
           <Converter />
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home navbar-fas"></i>
+              <i className="fas fa-home navbar-fas" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search navbar-fas"></i>
+              <i className="fas fa-search navbar-fas" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus navbar-fas"></i>
+              <i className="fas fa-plus navbar-fas" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle navbar-fas"></i>
+              <i className="fas fa-user-circle navbar-fas" data-title='menu'></i>
             </span>
-
           </div>
         </div>
       );
@@ -268,16 +269,16 @@ export default class Home extends React.Component {
           <Search />
             <div id='nav' className="navbar-container fas-search">
               <span onClick={this.handleHeaderClick}>
-                <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
               </span>
               <span onClick={this.handleClick}>
-                <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
               </span>
               <span onClick={this.handlePostClick}>
-                <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
               </span>
               <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
               </span>
             </div>
         </div>
@@ -301,16 +302,16 @@ export default class Home extends React.Component {
           </div>
           <div id='nav' className="navbar-container fas-search">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
             </span>
           </div>
         </div>
