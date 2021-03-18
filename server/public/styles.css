@@ -177,7 +177,7 @@ div#nav{
     }
     .navbar-container.fas-search {
       text-align: left;
-      font-size: 80%;
+      font-size: 100%;
       width: 100%;
     }
     .search input {
@@ -210,7 +210,7 @@ div#nav{
 @media screen and (max-width: 380px) {
     .navbar-container.fas-search {
       text-align: left;
-      font-size: 80%;
+      font-size: 100%;
     }
 }
 
@@ -233,10 +233,6 @@ div#nav{
   color: salmon;
   font-weight: bold;
   cursor: pointer;
-}
-
-.search.all-recipes{
-  height: 81vh;
 }
 
 @media screen and (max-width: 780px) {
