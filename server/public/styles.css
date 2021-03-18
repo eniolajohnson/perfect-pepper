@@ -12,14 +12,14 @@ body {
 }
 
 .home h2 {
-  background-color: #c4c4c4;
+  background-color: #808080;
   margin-top: 5%;
   padding: 1.5%;
   margin-bottom: 0%;
 }
 
 .home h5 {
-  background-color: #c4c4c4;
+  background-color: #808080;
   padding: 1.5%;
 }
 
@@ -154,7 +154,7 @@ body {
   border-radius: 4px;
   margin-left: 35%;
   width: 30%;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #808080;
   cursor: pointer;
   text-align: center;
 }
@@ -361,7 +361,7 @@ span.dropdown {
   position: absolute;
   bottom: 1.5rem;
   left: 56%;
-  background-color: #c4c4c4;
+  background-color: #808080;
   list-style-type: none;
   padding-left: 0.6rem;
   padding-right: 0.6rem;
