@@ -34,20 +34,29 @@ export default class search extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-    const title = this.state.value;
-    const recipes = this.state.recipes;
-    const foundArr = [];
-    recipes.map(recipe => {
-      if (recipe.recipeTitle.toLowerCase().match(title)) {
-        foundArr.push(recipe);
-        this.setState({ found: foundArr })
-      }
-    })
+    // const title = this.state.value;
+    // const recipes = this.state.recipes;
+    // const foundArr = [];
+    // recipes.map(recipe => {
+    //   if (recipe.recipeTitle.toLowerCase().match(title)) {
+    //     foundArr.push(recipe);
+    //     this.setState({ found: foundArr })
+    //   }
+    // })
   }
 
   handleSubmit(event) {
     this.setState({ isSubmitted: true})
     event.preventDefault();
+    const recipeTitle = this.state.value
+    fetch(`/api/fuzzy/${recipeTitle}`)
+      .then(response => response.json())
+      .then(recipes =>
+        this.setState({
+        found: recipes
+      })
+      )
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   handleClick(e) {
@@ -119,7 +128,8 @@ export default class search extends React.Component {
               )
             }
             )}
-          </div>)}
+            <a className='not-found' onClick={this.handleTryAgain} href="">Search for another recipe</a>
+            </div>)}
 
 
       if (found.length < 1) {
