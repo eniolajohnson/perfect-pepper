@@ -7,14 +7,15 @@ export default class Post extends React.Component{
       text: '',
       imageUrl: '',
       id: '',
+      textTitle: '',
       recipes: [],
       newRecipe: [],
-      getRecipe: false,
       title: false,
       ingredientsArr: [],
       instructionsArr: [],
       ingredients: false,
-      steps: false
+      steps: false,
+      complete: false
     }
 
     this.handleChangeText = this.handleChangeText.bind(this);
@@ -23,6 +24,7 @@ export default class Post extends React.Component{
     this.handleSubmitIns= this.handleSubmitIns.bind(this);
     this.handleSubmitIng = this.handleSubmitIng.bind(this);
     this.handleDone = this.handleDone.bind(this);
+    this.handleComplete = this.handleComplete.bind(this)
   }
 
   componentDidMount() {
@@ -35,7 +37,9 @@ export default class Post extends React.Component{
   }
 
   handleChangeText(event) {
-    this.setState({ text: event.target.value })
+    this.setState({
+      text: event.target.value,
+     })
   }
 
   handleChangeImage(event) {
@@ -47,7 +51,8 @@ export default class Post extends React.Component{
     const id = this.state.recipes.length + 1;
     this.setState({
       id,
-      text: ''
+      text: '',
+      textTitle: this.state.text
      })
 
     const newRecipe = {
@@ -127,9 +132,18 @@ export default class Post extends React.Component{
       .catch(error => console.error('Fetch failed!', error));
   }
 
+  handleComplete() {
+    this.setState({
+      complete: true,
+      steps: false,
+      ingredient: false,
+      title: false
+    })
+  }
+
   render(){
-    const { title, ingredients, steps } = this.state;
-    if (title === false && ingredients === false && steps === false){
+    const { title, ingredients, steps, complete } = this.state;
+    if (title === false && ingredients === false && steps === false && complete === false){
       return(
         <form className='post-container' onSubmit={this.handleSubmit}>
           <div>
@@ -184,8 +198,26 @@ export default class Post extends React.Component{
               }
             </div>
           </form>
+          <button onClick={this.handleComplete}>Complete Recipe</button>
         </div>
       )
+    }
+
+    if (complete === true){
+      const { textTitle, ingredientsArr, instructionsArr, imageUrl, id } = this.state;
+      return (
+        <div className='recipe' key={id}>
+          <img className='recipe-img' src={imageUrl} alt='recipe image' />
+          <span className='recipe-title'>{textTitle}</span>
+          <hr />
+          <h5 className='recipe-header'>INGREDIENTS</h5>
+          {ingredientsArr.map((ingredient, index) => <p key={index} className='recipe-text'>{ingredient}</p>)
+          }
+          <br />
+          <h5 className='recipe-header'>DIRECTIONS</h5>
+          {instructionsArr.map((step, index) => <p key={index}  className='recipe-text'> {step} </p>)}
+        </div>
+      );
     }
   }
 }
