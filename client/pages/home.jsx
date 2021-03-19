@@ -17,7 +17,7 @@ export default class Home extends React.Component {
       move: false,
       allRecipes: false,
       post: false,
-      search: true,
+      search: false,
       show: false,
       toggleOn: false,
       toggleOff: false
