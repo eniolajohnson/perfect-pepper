@@ -64,8 +64,6 @@ export default class Home extends React.Component {
     this.setState({
       allRecipes: true,
       search: false,
-      toggleOff: false,
-      toggleOn: false,
       show: false,
       post: false
     })
@@ -73,9 +71,8 @@ export default class Home extends React.Component {
 
   handleClick() {
     this.setState({
-      search: true,
-      toggleOff: false,
       toggleOn: false,
+      search: true,
       show: false,
       post: false,
       allRecipes: false
@@ -92,19 +89,14 @@ export default class Home extends React.Component {
     this.setState({
       toggleOff: false,
       toggleOn: true,
-      search: false,
-      show: false,
-      post: false,
-      allRecipes: false,
     })
   }
 
   handleHeaderClick() {
     this.setState({
+      toggleOn: false,
       allRecipes: false,
       search: false,
-      toggleOff: false,
-      toggleOn: false,
       show: false,
       post: false
     })
@@ -112,12 +104,12 @@ export default class Home extends React.Component {
 
   handlePostClick() {
     this.setState({
+      toggleOn: false,
       allRecipes: false,
       post: true,
-      search: false,
-      toggleOff: false,
       toggleOn: false,
-      show: false,
+      search: false,
+      show: false
     })
   }
 
@@ -125,22 +117,22 @@ export default class Home extends React.Component {
     const { user, handleSignOut } = this.context;
     if (!user) return <Redirect to="sign-in" />;
 
-    if(user && this.state.allRecipes === true){
+    if (user && this.state.allRecipes === true && this.state.toggleOff === false && this.state.toggleOn === false){
       return(
         <div>
           <AllRecipes />
           <div id='nav' className="navbar-container fas-search">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
             </span>
 
           </div>
@@ -148,24 +140,75 @@ export default class Home extends React.Component {
       )
     }
 
-    if (user && this.state.post === true) {
+    if (user && this.state.allRecipes === true && this.state.toggleOff === true && this.state.toggleOn === false) {
+      return (
+        <div>
+          <AllRecipes />
+          <div id='nav' className="navbar-container fas-search">
+            <span onClick={this.handleHeaderClick}>
+              <i className="fas fa-home" data-title='home'></i>
+            </span>
+            <span onClick={this.handleClick}>
+              <i className="fas fa-search" data-title='search'></i>
+            </span>
+            <span onClick={this.handlePostClick}>
+              <i className="fas fa-plus" data-title='new post'></i>
+            </span>
+            <span onClick={this.handleMenuClick}>
+              <i className="fas fa-user-circle" data-title='menu'></i>
+              <ul className="dropdown-content">
+                <p onClick={this.handleMetricClick}>Metric Converter</p>
+                <p onClick={this.handleAllRecipes}>All Recipes</p>
+              </ul>
+            </span>
+          </div>
+        </div>
+      )
+    }
+
+    if (user && this.state.post === true && this.state.toggleOff === false && this.state.toggleOn === false) {
       return (
         <div>
           <Post />
           <div id='nav' className="navbar-container fas-search">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
             </span>
+          </div>
+        </div>
+      )
+    }
 
+    if (user && this.state.toggleOff === true && this.state.post === true && this.state.toggleOn === false) {
+      return (
+        <div>
+          <Post />
+          <div id='nav' className="navbar-container fas-search">
+            <span onClick={this.handleHeaderClick}>
+              <i className="fas fa-home" data-title='home'></i>
+            </span>
+            <span onClick={this.handleClick}>
+              <i className="fas fa-search" data-title='search'></i>
+            </span>
+            <span onClick={this.handlePostClick}>
+              <i className="fas fa-plus" data-title='new post'></i>
+            </span>
+            <span onClick={this.handleMenuClick}>
+              <i className="fas fa-user-circle" data-title='menu'></i>
+              <ul className="dropdown-content">
+                <p onClick={this.handleMetricClick}>Metric Converter</p>
+                <p onClick={this.handleAllRecipes}>All Recipes</p>
+              </ul>
+            </span>
           </div>
         </div>
       )
@@ -185,78 +228,76 @@ export default class Home extends React.Component {
         <div>
           <div className='home'>
             <h2>Recipe of the day</h2>
-            <img src={recipe.imageUrl} alt={recipe.recipeTitle} />
-            <h5 className='pointer' onClick={this.displayRecipe}>{recipe.recipeTitle}</h5>
+            <img src={recipe.imageUrl} alt={recipe.recipeTitle} onClick={this.displayRecipe}/>
+            <h5 className='pointer salmon' onClick={this.displayRecipe}>{recipe.recipeTitle}</h5>
           </div>
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home navbar-fas"></i>
+              <i className="fas fa-home navbar-fas" data-title='home'>
+              </i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search navbar-fas"></i>
+              <i className="fas fa-search navbar-fas" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus navbar-fas"></i>
+              <i className="fas fa-plus navbar-fas" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle navbar-fas"></i>
+              <i className="fas fa-user-circle navbar-fas" data-title='menu'></i>
             </span>
           </div>
         </div>
       );
     }
 
-
-    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.toggleOff === true) {
+    if (user && this.state.search === false && this.state.show === false && this.state.toggleOn === false && this.state.isLoading === false && this.state.toggleOff === true) {
       const recipe = this.state.recipe;
       return (
         <div>
           <div className='home'>
             <h2>Recipe of the day</h2>
-            <img src={recipe.imageUrl} alt={recipe.recipeTitle} />
+            <img src={recipe.imageUrl} alt={recipe.recipeTitle} onClick={this.displayRecipe}/>
             <h5 className='pointer' onClick={this.displayRecipe}>{recipe.recipeTitle}</h5>
           </div>
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home navbar-fas"></i>
+              <i className="fas fa-home navbar-fas" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search navbar-fas"></i>
+              <i className="fas fa-search navbar-fas" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus navbar-fas"></i>
+              <i className="fas fa-plus navbar-fas" data-title='new post'></i>
             </span>
-              <span onClick={this.handleMenuClick}>
-                <i className="fas fa-user-circle navbar-fas"></i>
-                <ul className="dropdown-content">
+            <span onClick={this.handleMenuClick}>
+              <i className="fas fa-user-circle navbar-fas" data-title='menu'></i>
+              <ul className="dropdown-content">
                 <p onClick={this.handleMetricClick}>Metric Converter</p>
                 <p onClick={this.handleAllRecipes}>All Recipes</p>
-                </ul>
-              </span>
-
+              </ul>
+            </span>
           </div>
         </div>
       );
     }
 
-    if (user && this.state.toggleOn === true) {
+    if (user && this.state.post === false && this.state.toggleOn === true) {
       return (
         <div>
           <Converter />
           <div className="navbar-container">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home navbar-fas"></i>
+              <i className="fas fa-home navbar-fas" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search navbar-fas"></i>
+              <i className="fas fa-search navbar-fas" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus navbar-fas"></i>
+              <i className="fas fa-plus navbar-fas" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle navbar-fas"></i>
+              <i className="fas fa-user-circle navbar-fas" data-title='menu'></i>
             </span>
-
           </div>
         </div>
       );
@@ -268,16 +309,16 @@ export default class Home extends React.Component {
           <Search />
             <div id='nav' className="navbar-container fas-search">
               <span onClick={this.handleHeaderClick}>
-                <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
               </span>
               <span onClick={this.handleClick}>
-                <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
               </span>
               <span onClick={this.handlePostClick}>
-                <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
               </span>
               <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
               </span>
             </div>
         </div>
@@ -301,16 +342,16 @@ export default class Home extends React.Component {
           </div>
           <div id='nav' className="navbar-container fas-search">
             <span onClick={this.handleHeaderClick}>
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" data-title='home'></i>
             </span>
             <span onClick={this.handleClick}>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" data-title='search'></i>
             </span>
             <span onClick={this.handlePostClick}>
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" data-title='new post'></i>
             </span>
             <span onClick={this.handleMenuClick}>
-              <i className="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle" data-title='menu'></i>
             </span>
           </div>
         </div>

@@ -90,7 +90,17 @@ export default class search extends React.Component {
     if (this.state.isSubmitted === false){
       return (
         <form className="search" onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" placeholder='what will you like to make?' value={this.state.value} />
+            <label htmlFor="name">
+              Search Recipes
+          </label>
+            <input id="name" onChange={this.handleChange} type="text" placeholder='what will you like to make?' value={this.state.value} />
+            <div className='quote'>
+            <img src="https://3.bp.blogspot.com/-y_gsd1xXBhg/Wttse2i0k7I/AAAAAAAAi4c/tY9jpNrgKRcKD4gjSalY-oFUsPFq-xtSQCLcBGAs/s1600/Quotes%2Babout%2BGood%2BFood%2B%25284%2529.jpg" alt="quote"/>
+            <img src="https://i.pinimg.com/originals/b8/e1/4a/b8e14a14af9434aa5ccc0376a47a5237.jpg" alt="lotus"/>
+            <img src="https://i1.wp.com/artandhome.net/wp-content/uploads/2020/11/Cooking-Recipes-Quote.jpg?w=1080&ssl=1" alt="follow your heart not recipes"/>
+            <img src="https://miro.medium.com/max/1080/1*encMABpvRZItdCmFR1sD1g.jpeg" alt="thai food"/>
+            <img src="https://3.bp.blogspot.com/-PaEkSkxY4UI/WttqcHMVVMI/AAAAAAAAi2U/CK5mCl4s_Io4JWIyqmE3ahj5ZdfB0QPzgCLcBGAs/s1600/Quotes%2Babout%2BGood%2BFood%2B%25281%2529.jpg" alt="good food"/>
+            </div>
         </form>
       );
     }
