@@ -4,8 +4,8 @@ export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'Sarah',
-      password: 'Sarah'
+      username: 'admin',
+      password: 'admin1234$'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,8 +57,7 @@ export default class AuthForm extends React.Component {
             id="username"
             type="text"
             name="username"
-            value='Sarah'
-            // onChange={handleChange}
+            value='admin'
             className="form-control bg-light" />
         </div>
         <div className="mb-3">
@@ -71,7 +70,7 @@ export default class AuthForm extends React.Component {
             id="password"
             type="password"
             name="password"
-            value='Sarah'
+            value='admin1234$'
             className="form-control bg-light" />
         </div>
         <div className="d-flex justify-content-between align-items-center">
