@@ -82,9 +82,11 @@ pgweb
 NPM 6
 
 ## Set Up Environment
-Clone the repo
 
+Clone the repo
+````
 git clone https://github.com/eniolajohnson/perfect-pepper.git
+````
 
 Install all dependencies with NPM
 ````
