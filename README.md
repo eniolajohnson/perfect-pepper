@@ -86,20 +86,24 @@ Clone the repo
 
 git clone https://github.com/eniolajohnson/perfect-pepper.git
 
-## Install all dependencies with NPM
+Install all dependencies with NPM
+````
 npm install
+````
 
 Import the example database to PostgreSQL
-
+````
 npm run db:import
+````
 
 Create a .env file in the root directory and paste in the following:
-
+````
 PORT=3001
 
 DEV_SERVER_PORT=3000
 
 DATABASE_URL=postgres://dev:lfz@localhost/classNotes
+````
 
 Start the PostgreSQL service
 ````
