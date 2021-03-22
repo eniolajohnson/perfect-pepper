@@ -30,34 +30,55 @@ CSS3
 Argon 2
 
 ## Feature Overview
-The client can send GET requests to the server, and in return can receive and display the data to view:
+* The client can send GET requests to the server, and in return can receive and display the data to view:
 
-Recipe ingredients,
+  * Recipe ingredients,
 
-and Directions on how to prepare the meal.
+  * and Directions on how to prepare the meal.
 
-The client can send POST requests to the server to add to the database.
+* The client can send POST requests to the server to add to the database.
 
 
 ## Feature Lists
 
+* User sees a new ‘recipe of the day’ on the homepage every day.
+* User can search for recipes
+* User can post recipes
+* User can convert metrics 
+* User can see all recipes
+
+## Future Features
+
+* User can translate recipes to preferred language
+* User can like recipe post(s)
+* User can save post to drafts
+* User can edit their posts
+
+
+
 ## Lessons Learned
-Creating a basic yet responsive user interface using React.js and Bootstrap 4.
+* Creating a basic yet responsive user interface using React.js and Bootstrap 4.
 
-Leveraging Object Oriented Programming to organize code into components.
+* Leveraging Object Oriented Programming to organize code into components.
 
-Experienced the full development process by:
+* Experienced the full development process by:
 
-prototyping the visual design through Figma
+  * planning each feature
 
-designing a database schema on DB Designer and creating it with PostgreSQL
+  * prototyping the visual design through Figma
 
-collaborating on a single codebase through pull requests, code review and resolving code conflicts on GitHub
+  * designing a database schema on DB Designer and creating it with PostgreSQL
+
+  * collaborating on a single codebase through pull requests, code review and resolving code conflicts on GitHub
+  * deploying on a live site.
 
 ## System Requirements
 Node.js 10
+
 PostgreSQL 10
+
 pgweb
+
 NPM 6
 
 ## Set Up Environment
@@ -75,9 +96,10 @@ npm run db:import
 Create a .env file in the root directory and paste in the following:
 
 PORT=3001
+
 DEV_SERVER_PORT=3000
+
 DATABASE_URL=postgres://dev:lfz@localhost/classNotes
-SESSION_SECRET=secret
 
 ## Start the PostgreSQL service
 
@@ -89,6 +111,7 @@ Start the project.
 
 Once started, you can view the application by opening http://localhost:3000 in your browser.
 npm run dev
+
 
 ## Live Site
 The live version of the app can be viewed [here](https://perfect-pepper.herokuapp.com)
