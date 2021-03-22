@@ -101,7 +101,7 @@ DEV_SERVER_PORT=3000
 
 DATABASE_URL=postgres://dev:lfz@localhost/classNotes
 
-## Start the PostgreSQL service
+Start the PostgreSQL service
 ````
 sudo service postgresql start
 ````
@@ -110,9 +110,10 @@ Start the server
 pgweb --db=perfect-pepper
 ````
 Start the project. 
-
-Once started, you can view the application by opening http://localhost:3000 in your browser.
+````
 npm run dev
+````
+Once started, you can view the application by opening http://localhost:3000 in your browser.
 
 
 ## Live Site
