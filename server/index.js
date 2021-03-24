@@ -8,7 +8,10 @@ const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const app = express();
@@ -45,6 +48,31 @@ app.get('/api/recipes', (req, res) => {
   db.query(sql)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.get('/api/fuzzy/:recipeTitle', (req, res) => {
+  const recipeTitle = req.params.recipeTitle;
+  const title = '%' + recipeTitle.charAt(0).toUpperCase()
+    + recipeTitle.slice(1)
+    + '%';
+
+  const sql = `
+    select *
+      from "recipes"
+      where "recipeTitle" like $1
+  `;
+
+  const params = [`${title}`];
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows);
     })
     .catch(err => {
       console.error(err);
@@ -179,6 +207,7 @@ app.post('/api/steps', (req, res) => {
     values ($1, $2)
     returning *
   `;
+
   const params = [step, recipeId];
   db.query(sql, params)
     .then(result => {

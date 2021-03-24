@@ -1,3 +1,8 @@
+insert into "users" ("username", "hashedPassword")
+values ('admin', '$argon2i$v=19$m=4096,t=3,p=1$/HRGxxv3sHJuH6lSNBElbA$AzsogQ8UaALnFd3FumSCUqQS5ia4UwoLRhDDtw+iXFI'),
+('Sarah', '$argon2i$v=19$m=4096,t=3,p=1$d5ABid2/y7YIfTlxEuttkg$sCoaLcN7rSqNqUoynoD1BwCILXokXbxM5S5YLVTeO0Y')
+;
+
 insert into "recipes" (
   "recipeTitle",
   "imageUrl"

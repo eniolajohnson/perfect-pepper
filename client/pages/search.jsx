@@ -34,20 +34,29 @@ export default class search extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-    const title = this.state.value;
-    const recipes = this.state.recipes;
-    const foundArr = [];
-    recipes.map(recipe => {
-      if (recipe.recipeTitle.toLowerCase().match(title)) {
-        foundArr.push(recipe);
-        this.setState({ found: foundArr })
-      }
-    })
+    // const title = this.state.value;
+    // const recipes = this.state.recipes;
+    // const foundArr = [];
+    // recipes.map(recipe => {
+    //   if (recipe.recipeTitle.toLowerCase().match(title)) {
+    //     foundArr.push(recipe);
+    //     this.setState({ found: foundArr })
+    //   }
+    // })
   }
 
   handleSubmit(event) {
     this.setState({ isSubmitted: true})
     event.preventDefault();
+    const recipeTitle = this.state.value
+    fetch(`/api/fuzzy/${recipeTitle}`)
+      .then(response => response.json())
+      .then(recipes =>
+        this.setState({
+        found: recipes
+      })
+      )
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   handleClick(e) {
@@ -90,7 +99,17 @@ export default class search extends React.Component {
     if (this.state.isSubmitted === false){
       return (
         <form className="search" onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" placeholder='what will you like to make?' value={this.state.value} />
+            <label htmlFor="name">
+              Search Recipes
+          </label>
+            <input id="name" onChange={this.handleChange} type="text" placeholder='what will you like to make?' value={this.state.value} />
+            <div className='quote'>
+            <img src="https://3.bp.blogspot.com/-y_gsd1xXBhg/Wttse2i0k7I/AAAAAAAAi4c/tY9jpNrgKRcKD4gjSalY-oFUsPFq-xtSQCLcBGAs/s1600/Quotes%2Babout%2BGood%2BFood%2B%25284%2529.jpg" alt="quote"/>
+            <img src="https://i.pinimg.com/originals/b8/e1/4a/b8e14a14af9434aa5ccc0376a47a5237.jpg" alt="lotus"/>
+            <img src="https://i1.wp.com/artandhome.net/wp-content/uploads/2020/11/Cooking-Recipes-Quote.jpg?w=1080&ssl=1" alt="follow your heart not recipes"/>
+            <img src="https://miro.medium.com/max/1080/1*encMABpvRZItdCmFR1sD1g.jpeg" alt="thai food"/>
+            <img src="https://3.bp.blogspot.com/-PaEkSkxY4UI/WttqcHMVVMI/AAAAAAAAi2U/CK5mCl4s_Io4JWIyqmE3ahj5ZdfB0QPzgCLcBGAs/s1600/Quotes%2Babout%2BGood%2BFood%2B%25281%2529.jpg" alt="good food"/>
+            </div>
         </form>
       );
     }
@@ -109,7 +128,8 @@ export default class search extends React.Component {
               )
             }
             )}
-          </div>)}
+            <a className='not-found' onClick={this.handleTryAgain} href="">Search for another recipe</a>
+            </div>)}
 
 
       if (found.length < 1) {

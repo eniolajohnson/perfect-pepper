@@ -55,16 +55,14 @@ export default class AllRecipes extends React.Component {
     if (this.state.display === false) {
       return (
         <div className='all-recipes'>
-          {this.state.recipes.map(recipe => {
+          {this.state.recipes.map((recipe, index) => {
             return (
-
-                <div className='card'>
+                <div key={index} className='card'>
                   <img className='card-img-top' src={recipe.imageUrl} alt={`an image of ${recipe.recipeTitle}`} />
                   <div className='card-body'>
                     <h5 className='card-title' onClick={this.handleClick}>{recipe.recipeTitle}</h5>
                   </div>
                 </div>
-
             )
           })}
         </div>
@@ -80,11 +78,11 @@ export default class AllRecipes extends React.Component {
             <span className='recipe-title'>{title}</span>
             <hr />
             <h5 className='recipe-header'>INGREDIENTS</h5>
-            {ingredients.map(ingredient => <p className='recipe-text'>{ingredient}</p>)
+            {ingredients.map((ingredient, index) => <p key={index} className='recipe-text'>{ingredient}</p>)
             }
             <br />
             <h5 className='recipe-header'>DIRECTIONS</h5>
-            {instructions.map(step => <p className='recipe-text'> {step} </p>)}
+            {instructions.map((step, index) => <p key={index} className='recipe-text'> {step} </p>)}
           </div>
         </div>
       );
